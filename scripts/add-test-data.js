@@ -34,6 +34,13 @@ async function addTestData() {
           metricName: 'pass_rate',
           metricValue: Math.random() * 0.3 + 0.7, // Случайный процент от 70% до 100%
           unit: 'percentage'
+        },
+        {
+          modelId: model.id,
+          benchmarkType: 'aider',
+          metricName: 'aider_benchmark_score',
+          metricValue: Math.random() * 0.15 + 0.8, // Случайный скор от 80% до 95%
+          unit: 'score'
         }
       );
     }

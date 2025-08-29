@@ -9,9 +9,9 @@ import {
   flexRender,
   ColumnDef,
   SortingState,
-  ColumnFiltersState
+
 } from '@tanstack/react-table'
-import { ArrowUpDown, ArrowUp, ArrowDown, Star, Clock, DollarSign, Zap, MessageSquare, Code, Brain } from 'lucide-react'
+import { ArrowUpDown, ArrowUp, ArrowDown, Star, Clock, DollarSign, Zap, MessageSquare, Code, Brain, Bot } from 'lucide-react'
 import { ModelRatingForm } from './ModelRatingForm'
 import { ModelBenchmarkDetails } from './ModelBenchmarkDetails'
 
@@ -30,6 +30,7 @@ interface AIModel {
   isRecommended: boolean
   isAvailableInCursor?: boolean
   isReasoning?: boolean
+  isAgent?: boolean
   category: string
   capabilities: string[]
   lastUpdated: string
@@ -67,7 +68,6 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
   const [models, setModels] = useState<AIModel[]>(initialData)
   const [loading, setLoading] = useState(initialData.length === 0)
   const [sorting, setSorting] = useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [globalFilter, setGlobalFilter] = useState('')
   const [ratingForm, setRatingForm] = useState<{ modelId: string; modelName: string } | null>(null)
   const [benchmarkDetails, setBenchmarkDetails] = useState<{ modelId: string; modelName: string; benchmarks: any[] } | null>(null)
@@ -235,6 +235,12 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
                     title="Модель с reasoning способностями"
                   />
                 )}
+                {row.original.isAgent && (
+                  <Bot
+                    className="h-4 w-4 text-green-600 dark:text-green-400"
+                    title="Модель с agent capabilities"
+                  />
+                )}
               </div>
             </div>
             <div className="text-sm text-gray-600 dark:text-gray-400">{row.original.provider}</div>
@@ -244,15 +250,6 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
               </span>
             )}
           </div>
-        )
-      },
-      {
-        accessorKey: 'category',
-        header: 'Category',
-        cell: ({ row }) => (
-          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 capitalize">
-            {row.original.category}
-          </span>
         )
       },
       {
@@ -348,13 +345,22 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
             )}
           </button>
         ),
-        sortingFn: 'alphanumeric',
+        sortingFn: (rowA, rowB) => {
+          const a = rowA.original.pricingInput || 999999 // Высокое значение для моделей без цены
+          const b = rowB.original.pricingInput || 999999
+
+          // Бесплатные модели (isFree = true) идут первыми
+          if (rowA.original.isFree && !rowB.original.isFree) return -1
+          if (!rowA.original.isFree && rowB.original.isFree) return 1
+
+          return a - b // По возрастанию цены
+        },
         cell: ({ row }) => (
           <div className="text-xs">
             {row.original.pricingInput ? (
               <div className="flex items-center">
                 <DollarSign className="h-3 w-3 mr-1 text-gray-400 dark:text-gray-500" />
-                <span className="font-medium text-gray-900 dark:text-gray-100">${row.original.pricingInput}</span>
+                <span className="font-medium text-gray-900 dark:text-gray-100">${row.original.pricingInput?.toFixed(4)}</span>
                 <span className="text-gray-600 dark:text-gray-400">/1K</span>
               </div>
             ) : (
@@ -405,6 +411,73 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
         )
       },
       {
+        id: 'aider',
+        header: ({ column }) => (
+          <button
+            className="flex items-center gap-1 hover:bg-gray-100 dark:hover:bg-gray-700 px-2 py-1 rounded text-gray-700 dark:text-gray-300"
+            onClick={() => column.toggleSorting()}
+          >
+            Aider Benchmark
+            {column.getIsSorted() === 'asc' ? (
+              <ArrowUp className="h-4 w-4" />
+            ) : column.getIsSorted() === 'desc' ? (
+              <ArrowDown className="h-4 w-4" />
+            ) : (
+              <ArrowUpDown className="h-4 w-4" />
+            )}
+          </button>
+        ),
+        accessorFn: (row) => {
+          // Ищем aider benchmark среди результатов
+          const aiderBenchmark = row.benchmarkResults.find(b =>
+            b.metricName.toLowerCase().includes('aider') ||
+            b.benchmarkType.toLowerCase().includes('aider')
+          );
+          return aiderBenchmark ? aiderBenchmark.metricValue : null;
+        },
+        sortingFn: (rowA, rowB) => {
+          const aValue = rowA.original.benchmarkResults.find(b =>
+            b.metricName.toLowerCase().includes('aider') ||
+            b.benchmarkType.toLowerCase().includes('aider')
+          )?.metricValue || 0;
+
+          const bValue = rowB.original.benchmarkResults.find(b =>
+            b.metricName.toLowerCase().includes('aider') ||
+            b.benchmarkType.toLowerCase().includes('aider')
+          )?.metricValue || 0;
+
+          // Модели без данных идут в конец
+          if (aValue === 0 && bValue === 0) return 0;
+          if (aValue === 0) return 1;
+          if (bValue === 0) return -1;
+
+          return bValue - aValue; // Сортировка по убыванию (лучшие модели сверху)
+        },
+        cell: ({ row }) => {
+          const aiderBenchmark = row.original.benchmarkResults.find(b =>
+            b.metricName.toLowerCase().includes('aider') ||
+            b.benchmarkType.toLowerCase().includes('aider')
+          );
+
+          return (
+            <div className="text-xs">
+              {aiderBenchmark ? (
+                <div className="flex flex-col">
+                  <span className="font-medium text-gray-900 dark:text-gray-100">
+                    {(aiderBenchmark.metricValue * 100).toFixed(1)}%
+                  </span>
+                  <span className="text-gray-600 dark:text-gray-400 text-xs">
+                    Aider Score
+                  </span>
+                </div>
+              ) : (
+                <span className="text-gray-500 dark:text-gray-400">N/A</span>
+              )}
+            </div>
+          );
+        }
+      },
+      {
         id: 'actions',
         header: 'Actions',
         cell: ({ row }) => (
@@ -428,11 +501,9 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
     onGlobalFilterChange: setGlobalFilter,
     state: {
       sorting,
-      columnFilters,
       globalFilter
     }
   })
@@ -457,17 +528,7 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
             onChange={(e) => setGlobalFilter(e.target.value)}
             className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent"
           />
-          <select
-            value={table.getColumn('category')?.getFilterValue() as string || ''}
-            onChange={(e) => table.getColumn('category')?.setFilterValue(e.target.value)}
-            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent"
-          >
-            <option value="">All Categories</option>
-            <option value="coding">Coding</option>
-            <option value="chat">Chat</option>
-            <option value="vision">Vision</option>
-            <option value="mixed">Mixed</option>
-          </select>
+
         </div>
       </div>
 

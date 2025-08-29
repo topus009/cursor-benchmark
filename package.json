@@ -15,7 +15,11 @@
     "restore:cursor-icons": "node scripts/add-cursor-icons.js",
     "remove:cursor-icons": "node scripts/remove-cursor-icons.js",
     "update:models": "node scripts/update-models.js",
-    "add:test-data": "node scripts/add-test-data.js"
+    "add:test-data": "node scripts/add-test-data.js",
+    "analyze:missing": "node scripts/analyze-missing-data.js",
+    "fill:known-data": "node scripts/fill-known-data.js",
+    "update:aider": "node scripts/update-aider-benchmarks.js",
+    "update:agents": "node scripts/update-agent-capabilities.js"
   },
   "dependencies": {
     "@prisma/client": "^6.15.0",

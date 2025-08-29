@@ -26,6 +26,7 @@ model AIModel {
   isRecommended     Boolean  @default(false)
   isAvailableInCursor Boolean @default(false) // доступна ли модель в Cursor IDE
   isReasoning       Boolean  @default(false) // имеет ли модель reasoning способности
+  isAgent           Boolean  @default(false) // имеет ли модель agent capabilities
   category          String   // chat, coding, vision, etc.
   capabilities      String   // JSON массив возможностей
   releaseDate       DateTime?
