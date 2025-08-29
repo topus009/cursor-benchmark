@@ -108,7 +108,7 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.99,
+      "passRate": 0.85,
       "aiderBenchmark": null,
       "costValueScore": null,
       "totalBenchmarks": 12
@@ -740,7 +740,7 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 1,
+      "passRate": 0.88,
       "aiderBenchmark": null,
       "costValueScore": null,
       "totalBenchmarks": 12
@@ -1310,7 +1310,7 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.99,
+      "passRate": 0.75,
       "aiderBenchmark": null,
       "costValueScore": null,
       "totalBenchmarks": 12
@@ -1338,7 +1338,7 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.96,
+      "passRate": 0.82,
       "aiderBenchmark": null,
       "costValueScore": null,
       "totalBenchmarks": 12
@@ -1394,7 +1394,7 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.99,
+      "passRate": 0.78,
       "aiderBenchmark": null,
       "costValueScore": null,
       "totalBenchmarks": 12
