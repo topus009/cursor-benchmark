@@ -57,9 +57,13 @@ interface UserRating {
   costRating?: number
 }
 
-export function ModelsComparisonTable() {
-  const [models, setModels] = useState<AIModel[]>([])
-  const [loading, setLoading] = useState(true)
+interface ModelsComparisonTableProps {
+  initialData?: AIModel[]
+}
+
+export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTableProps = {}) {
+  const [models, setModels] = useState<AIModel[]>(initialData)
+  const [loading, setLoading] = useState(initialData.length === 0)
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [globalFilter, setGlobalFilter] = useState('')
@@ -68,8 +72,15 @@ export function ModelsComparisonTable() {
 
   // Загружаем данные
   useEffect(() => {
-    fetchModels()
-  }, [])
+    // Если переданы initialData, используем их
+    if (initialData.length > 0) {
+      setModels(initialData)
+      setLoading(false)
+    } else {
+      // Иначе загружаем самостоятельно
+      fetchModels()
+    }
+  }, [initialData])
 
   const fetchModels = async () => {
     try {

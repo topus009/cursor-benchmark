@@ -8,6 +8,7 @@ import { SyncStatus } from '@/components/SyncStatus'
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
   const [syncStatus, setSyncStatus] = useState<'idle' | 'syncing' | 'success' | 'error'>('idle')
+  const [modelsData, setModelsData] = useState<any[]>([])
 
   useEffect(() => {
     // Загружаем начальные данные
@@ -17,8 +18,16 @@ export default function Home() {
   const loadInitialData = async () => {
     try {
       setIsLoading(true)
-      // Здесь будет загрузка данных через API
-      await new Promise(resolve => setTimeout(resolve, 1000)) // Имитация загрузки
+
+      // Загружаем модели из API
+      const modelsResponse = await fetch('/api/models')
+      if (!modelsResponse.ok) throw new Error('Failed to fetch models')
+
+      const modelsResult = await modelsResponse.json()
+      if (modelsResult.success) {
+        setModelsData(modelsResult.data)
+        console.log(`Loaded ${modelsResult.data.length} models`)
+      }
     } catch (error) {
       console.error('Error loading initial data:', error)
     } finally {
@@ -71,7 +80,7 @@ export default function Home() {
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
           </div>
         ) : (
-          <ModelsComparisonTable />
+          <ModelsComparisonTable initialData={modelsData} />
         )}
       </main>
     </div>

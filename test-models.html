@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Models Test</title>
+</head>
+<body>
+    <h1>Testing Models API</h1>
+    <div id="result"></div>
+
+    <script>
+        async function testModels() {
+            try {
+                const response = await fetch('/api/models');
+                const data = await response.json();
+
+                const resultDiv = document.getElementById('result');
+
+                if (data.success && data.data) {
+                    resultDiv.innerHTML = `
+                        <h2>✅ API работает! Найдено ${data.data.length} моделей</h2>
+                        <h3>Провайдеры:</h3>
+                        <ul>
+                            ${Object.entries(getProviderStats(data.data))
+                                .map(([provider, count]) => `<li>${provider}: ${count} моделей</li>`)
+                                .join('')}
+                        </ul>
+                        <h3>Некоторые модели:</h3>
+                        <ul>
+                            ${data.data.slice(0, 10)
+                                .map(model => `<li>${model.displayName} (${model.provider})</li>`)
+                                .join('')}
+                        </ul>
+                    `;
+                } else {
+                    resultDiv.innerHTML = '<h2>❌ Ошибка API</h2><pre>' + JSON.stringify(data, null, 2) + '</pre>';
+                }
+            } catch (error) {
+                document.getElementById('result').innerHTML =
+                    '<h2>❌ Ошибка сети</h2><p>' + error.message + '</p>';
+            }
+        }
+
+        function getProviderStats(models) {
+            const stats = {};
+            models.forEach(model => {
+                stats[model.provider] = (stats[model.provider] || 0) + 1;
+            });
+            return stats;
+        }
+
+        testModels();
+    </script>
+</body>
+</html>
