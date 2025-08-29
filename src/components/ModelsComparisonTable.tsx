@@ -244,11 +244,6 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
               </div>
             </div>
             <div className="text-sm text-gray-600 dark:text-gray-400">{row.original.provider}</div>
-            {row.original.isRecommended && (
-              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
-                Recommended
-              </span>
-            )}
           </div>
         )
       },
@@ -393,21 +388,14 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
         }
       },
       {
-        id: 'performance',
-        accessorFn: (row) => {
-          // Вычисляем общий скор производительности (0-10 шкала)
-          let score = 0
-          if (row.avgRating) score += row.avgRating * 1.5 // Рейтинг весит больше
-          if (row.passRate) score += row.passRate * 5 // Качество кода
-          if (row.avgResponseTime) score -= Math.min(row.avgResponseTime / 10, 2) // Штраф за медленность
-          return Math.max(0, Math.min(10, score))
-        },
+        id: 'speed',
+        accessorFn: (row) => row.avgResponseTime || 999999, // Высокое значение для моделей без данных
         header: ({ column }) => (
           <button
             className="flex items-center gap-1 hover:bg-gray-100 dark:hover:bg-gray-700 px-2 py-1 rounded text-gray-700 dark:text-gray-300"
             onClick={() => column.toggleSorting()}
           >
-            Performance
+            Speed
             {column.getIsSorted() === 'asc' ? (
               <ArrowUp className="h-4 w-4" />
             ) : column.getIsSorted() === 'desc' ? (
@@ -417,14 +405,17 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
             )}
           </button>
         ),
-        sortingFn: 'alphanumeric',
+        sortingFn: (rowA, rowB) => {
+          const timeA = rowA.original.avgResponseTime || 999999;
+          const timeB = rowB.original.avgResponseTime || 999999;
+          return timeA - timeB; // По возрастанию (быстрые модели первыми)
+        },
         cell: ({ row }) => {
           const model = row.original
           return (
-            <div className="flex flex-col space-y-1">
-              {/* Скорость */}
-              {model.avgResponseTime && (
-                <div className="flex items-center text-xs">
+            <div className="text-xs">
+              {model.avgResponseTime ? (
+                <div className="flex items-center">
                   <Clock className="h-3 w-3 mr-1 text-gray-400 dark:text-gray-500" />
                   <span className={`font-medium ${
                     model.avgResponseTime < 1 ? 'text-green-600 dark:text-green-400' :
@@ -437,17 +428,74 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
                     }
                   </span>
                 </div>
+              ) : (
+                <span className="text-gray-500 dark:text-gray-400">N/A</span>
               )}
+            </div>
+          )
+        }
+      },
+      {
+        id: 'quality',
+        accessorFn: (row) => {
+          // Вычисляем скор качества только на основе passRate
+          if (row.passRate) {
+            return Math.max(0, Math.min(10, row.passRate * 10)) // Конвертируем 0-1 в 0-10 шкалу
+          }
+          return 0 // Если нет данных о качестве кода
+        },
+        header: ({ column }) => (
+          <button
+            className="flex items-center gap-1 hover:bg-gray-100 dark:hover:bg-gray-700 px-2 py-1 rounded text-gray-700 dark:text-gray-300"
+            onClick={() => column.toggleSorting()}
+          >
+            Quality
+            {column.getIsSorted() === 'asc' ? (
+              <ArrowUp className="h-4 w-4" />
+            ) : column.getIsSorted() === 'desc' ? (
+              <ArrowDown className="h-4 w-4" />
+            ) : (
+              <ArrowUpDown className="h-4 w-4" />
+            )}
+          </button>
+        ),
+        sortingFn: (rowA, rowB) => {
+          const calculateScore = (row: any) => {
+            // Вычисляем скор качества только на основе passRate
+            if (row.passRate) {
+              return Math.max(0, Math.min(10, row.passRate * 10)) // Конвертируем 0-1 в 0-10 шкалу
+            }
+            return 0 // Если нет данных о качестве кода
+          };
 
+          const scoreA = calculateScore(rowA.original);
+          const scoreB = calculateScore(rowB.original);
+
+          return scoreB - scoreA; // По убыванию (лучшие модели сверху)
+        },
+        cell: ({ row }) => {
+          const model = row.original
+
+          return (
+            <div className="flex flex-col space-y-1">
               {/* Качество кода */}
-              {model.passRate && (
+              {model.passRate ? (
                 <div className="flex items-center text-xs">
                   <Zap className="h-3 w-3 mr-1 text-green-500" />
-                  <span className="font-medium text-gray-900 dark:text-gray-100">{(model.passRate * 100).toFixed(0)}%</span>
+                  <span className={`font-medium ${
+                    model.passRate >= 0.8 ? 'text-green-600 dark:text-green-400' :
+                    model.passRate >= 0.6 ? 'text-blue-600 dark:text-blue-400' :
+                    model.passRate >= 0.4 ? 'text-yellow-600 dark:text-yellow-400' :
+                    'text-red-600 dark:text-red-400'
+                  }`}>
+                    {(model.passRate * 100).toFixed(0)}%
+                  </span>
                 </div>
+              ) : (
+                <span className="text-gray-500 dark:text-gray-400 text-xs">N/A</span>
               )}
 
-              {/* Пользовательский рейтинг */}
+              {/* Пользовательские отзывы (отдельно, не влияет на скор) */}
               {model.avgRating && (
                 <div className="flex items-center text-xs">
                   <Star className="h-3 w-3 mr-1 text-yellow-500" />
