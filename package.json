@@ -6,7 +6,15 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio",
+    "parse:models": "node scripts/parse-models.js",
+    "check:models": "node scripts/check-models.js",
+    "restore:cursor-icons": "node scripts/add-cursor-icons.js",
+    "remove:cursor-icons": "node scripts/remove-cursor-icons.js",
+    "update:models": "node scripts/update-models.js"
   },
   "dependencies": {
     "@prisma/client": "^6.15.0",

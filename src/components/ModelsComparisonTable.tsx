@@ -11,7 +11,7 @@ import {
   SortingState,
   ColumnFiltersState
 } from '@tanstack/react-table'
-import { ArrowUpDown, ArrowUp, ArrowDown, Star, Clock, DollarSign, Zap, MessageSquare } from 'lucide-react'
+import { ArrowUpDown, ArrowUp, ArrowDown, Star, Clock, DollarSign, Zap, MessageSquare, Code } from 'lucide-react'
 import { ModelRatingForm } from './ModelRatingForm'
 import { ModelBenchmarkDetails } from './ModelBenchmarkDetails'
 
@@ -28,6 +28,7 @@ interface AIModel {
   pricingOutput?: number
   isFree: boolean
   isRecommended: boolean
+  isAvailableInCursor?: boolean
   category: string
   capabilities: string[]
   lastUpdated: string
@@ -218,7 +219,15 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
         ),
         cell: ({ row }) => (
           <div>
-            <div className="font-medium text-gray-900 dark:text-white">{row.original.displayName}</div>
+            <div className="flex items-center gap-2">
+              <div className="font-medium text-gray-900 dark:text-white">{row.original.displayName}</div>
+              {row.original.isAvailableInCursor && (
+                <Code
+                  className="h-4 w-4 text-blue-600 dark:text-blue-400"
+                  title="Доступно в Cursor IDE"
+                />
+              )}
+            </div>
             <div className="text-sm text-gray-600 dark:text-gray-400">{row.original.provider}</div>
             {row.original.isRecommended && (
               <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">

@@ -14,6 +14,7 @@ export interface CursorModel {
   }
   isFree: boolean
   isRecommended: boolean
+  isAvailableInCursor?: boolean
   category: string
   capabilities: string[]
 }
@@ -89,6 +90,7 @@ export class CursorModelsService {
         pricingOutput: model.pricing?.output,
         isFree: model.isFree,
         isRecommended: model.isRecommended,
+        isAvailableInCursor: model.isAvailableInCursor || true, // По умолчанию доступны в Cursor
         category: model.category,
         capabilities: JSON.stringify(model.capabilities),
         lastUpdated: new Date()
@@ -105,6 +107,7 @@ export class CursorModelsService {
         pricingOutput: model.pricing?.output,
         isFree: model.isFree,
         isRecommended: model.isRecommended,
+        isAvailableInCursor: model.isAvailableInCursor || true, // По умолчанию доступны в Cursor
         category: model.category,
         capabilities: JSON.stringify(model.capabilities)
       }
@@ -158,6 +161,7 @@ export class CursorModelsService {
         maxTokens: 2048,
         isFree: true,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'chat',
         capabilities: ['chat', 'basic_coding', 'summarization']
       },
@@ -177,6 +181,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: true,
+        isAvailableInCursor: true,
         category: 'coding',
         capabilities: ['code_generation', 'code_review', 'debugging', 'documentation', 'analysis', 'reasoning']
       },
@@ -194,6 +199,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'chat',
         capabilities: ['chat', 'analysis', 'writing', 'summarization']
       },
@@ -211,6 +217,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'coding',
         capabilities: ['code_generation', 'analysis', 'reasoning', 'research', 'documentation']
       },
@@ -228,6 +235,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'chat',
         capabilities: ['chat', 'analysis', 'writing', 'coding']
       },
@@ -245,6 +253,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'chat',
         capabilities: ['chat', 'summarization', 'basic_coding']
       },
@@ -281,6 +290,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'chat',
         capabilities: ['chat', 'analysis', 'writing', 'basic_coding']
       },
@@ -298,6 +308,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'coding',
         capabilities: ['code_generation', 'analysis', 'reasoning', 'documentation']
       },
@@ -315,6 +326,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'chat',
         capabilities: ['chat', 'analysis', 'writing', 'coding']
       },
@@ -332,6 +344,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'chat',
         capabilities: ['chat', 'analysis', 'writing', 'basic_coding']
       },
@@ -351,6 +364,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'coding',
         capabilities: ['code_generation', 'analysis', 'reasoning', 'multimodal', 'documentation']
       },
@@ -368,6 +382,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'chat',
         capabilities: ['chat', 'analysis', 'multimodal', 'basic_coding']
       },
@@ -385,6 +400,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'chat',
         capabilities: ['chat', 'analysis', 'writing', 'basic_coding']
       },
@@ -404,6 +420,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'coding',
         capabilities: ['code_generation', 'analysis', 'reasoning', 'documentation']
       },
@@ -421,6 +438,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'chat',
         capabilities: ['chat', 'analysis', 'writing', 'coding']
       },
@@ -438,6 +456,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'chat',
         capabilities: ['chat', 'analysis', 'writing', 'basic_coding']
       },
@@ -457,6 +476,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'coding',
         capabilities: ['code_generation', 'analysis', 'reasoning', 'documentation']
       },
@@ -474,6 +494,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'coding',
         capabilities: ['code_generation', 'analysis', 'reasoning', 'documentation']
       },
@@ -491,6 +512,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'chat',
         capabilities: ['chat', 'analysis', 'writing', 'basic_coding']
       },
@@ -508,6 +530,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'chat',
         capabilities: ['chat', 'analysis', 'basic_coding']
       },
@@ -527,6 +550,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'coding',
         capabilities: ['code_generation', 'code_review', 'debugging', 'documentation']
       },
@@ -544,6 +568,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'coding',
         capabilities: ['code_generation', 'code_review', 'debugging', 'documentation']
       },
@@ -563,6 +588,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'coding',
         capabilities: ['code_generation', 'code_review', 'debugging', 'documentation']
       },
@@ -580,6 +606,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'chat',
         capabilities: ['chat', 'analysis', 'writing', 'reasoning']
       },
@@ -599,6 +626,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'chat',
         capabilities: ['chat', 'analysis', 'writing', 'reasoning']
       },
@@ -616,6 +644,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'chat',
         capabilities: ['chat', 'analysis', 'writing', 'reasoning']
       },
@@ -635,6 +664,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'coding',
         capabilities: ['code_generation', 'analysis', 'reasoning', 'documentation']
       },
@@ -654,6 +684,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'chat',
         capabilities: ['chat', 'analysis', 'writing', 'reasoning']
       },
@@ -673,6 +704,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'chat',
         capabilities: ['chat', 'analysis', 'reasoning', 'humor']
       },
@@ -690,6 +722,7 @@ export class CursorModelsService {
         },
         isFree: false,
         isRecommended: false,
+        isAvailableInCursor: true,
         category: 'chat',
         capabilities: ['chat', 'analysis', 'reasoning', 'humor']
       }

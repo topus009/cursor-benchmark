@@ -24,6 +24,7 @@ model AIModel {
   pricingOutput     Float?   // цена за 1K токенов output
   isFree            Boolean  @default(false)
   isRecommended     Boolean  @default(false)
+  isAvailableInCursor Boolean @default(false) // доступна ли модель в Cursor IDE
   category          String   // chat, coding, vision, etc.
   capabilities      String   // JSON массив возможностей
   releaseDate       DateTime?
