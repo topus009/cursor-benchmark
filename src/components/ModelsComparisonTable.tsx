@@ -203,7 +203,7 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
         accessorKey: 'displayName',
         header: ({ column }) => (
           <button
-            className="flex items-center gap-1 hover:bg-gray-100 px-2 py-1 rounded"
+            className="flex items-center gap-1 hover:bg-gray-100 dark:hover:bg-gray-700 px-2 py-1 rounded text-gray-700 dark:text-gray-300"
             onClick={() => column.toggleSorting()}
           >
             Model
@@ -218,10 +218,10 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
         ),
         cell: ({ row }) => (
           <div>
-            <div className="font-medium text-gray-900">{row.original.displayName}</div>
-            <div className="text-sm text-gray-500">{row.original.provider}</div>
+            <div className="font-medium text-gray-900 dark:text-white">{row.original.displayName}</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">{row.original.provider}</div>
             {row.original.isRecommended && (
-              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
+              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
                 Recommended
               </span>
             )}
@@ -232,14 +232,44 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
         accessorKey: 'category',
         header: 'Category',
         cell: ({ row }) => (
-          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 capitalize">
+          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 capitalize">
             {row.original.category}
           </span>
         )
       },
       {
         id: 'performance',
-        header: 'Performance',
+        header: ({ column }) => (
+          <button
+            className="flex items-center gap-1 hover:bg-gray-100 dark:hover:bg-gray-700 px-2 py-1 rounded text-gray-700 dark:text-gray-300"
+            onClick={() => column.toggleSorting()}
+          >
+            Performance
+            {column.getIsSorted() === 'asc' ? (
+              <ArrowUp className="h-4 w-4" />
+            ) : column.getIsSorted() === 'desc' ? (
+              <ArrowDown className="h-4 w-4" />
+            ) : (
+              <ArrowUpDown className="h-4 w-4" />
+            )}
+          </button>
+        ),
+        sortingFn: (rowA, rowB) => {
+          // Сортировка по комплексной метрике производительности
+          const a = rowA.original
+          const b = rowB.original
+
+          // Вычисляем общий скор производительности (0-10 шкала)
+          const getPerfScore = (model: typeof a) => {
+            let score = 0
+            if (model.avgRating) score += model.avgRating * 1.5 // Рейтинг весит больше
+            if (model.passRate) score += model.passRate * 5 // Качество кода
+            if (model.avgResponseTime) score -= Math.min(model.avgResponseTime / 10, 2) // Штраф за медленность
+            return Math.max(0, Math.min(10, score))
+          }
+
+          return getPerfScore(b) - getPerfScore(a) // По убыванию
+        },
         cell: ({ row }) => {
           const model = row.original
           return (
@@ -247,8 +277,8 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
               {/* Скорость */}
               {model.avgResponseTime && (
                 <div className="flex items-center text-xs">
-                  <Clock className="h-3 w-3 mr-1 text-gray-400" />
-                  <span className="font-medium">{model.avgResponseTime}s</span>
+                  <Clock className="h-3 w-3 mr-1 text-gray-400 dark:text-gray-500" />
+                  <span className="font-medium text-gray-900 dark:text-gray-100">{model.avgResponseTime}s</span>
                 </div>
               )}
 
@@ -256,7 +286,7 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
               {model.passRate && (
                 <div className="flex items-center text-xs">
                   <Zap className="h-3 w-3 mr-1 text-green-500" />
-                  <span className="font-medium">{(model.passRate * 100).toFixed(0)}%</span>
+                  <span className="font-medium text-gray-900 dark:text-gray-100">{(model.passRate * 100).toFixed(0)}%</span>
                 </div>
               )}
 
@@ -264,8 +294,8 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
               {model.avgRating && (
                 <div className="flex items-center text-xs">
                   <Star className="h-3 w-3 mr-1 text-yellow-500" />
-                  <span className="font-medium">{model.avgRating.toFixed(1)}</span>
-                  <span className="text-gray-500 ml-1">({model.totalRatings})</span>
+                  <span className="font-medium text-gray-900 dark:text-gray-100">{model.avgRating.toFixed(1)}</span>
+                  <span className="text-gray-600 dark:text-gray-400 ml-1">({model.totalRatings})</span>
                 </div>
               )}
             </div>
@@ -278,8 +308,8 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
         cell: ({ row }) => (
           <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
             row.original.isFree
-              ? 'bg-green-100 text-green-800'
-              : 'bg-gray-100 text-gray-800'
+              ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200'
+              : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200'
           }`}>
             {row.original.isFree ? 'Free' : 'Paid'}
           </span>
@@ -287,26 +317,72 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
       },
       {
         id: 'pricing',
-        header: 'Pricing',
+        header: ({ column }) => (
+          <button
+            className="flex items-center gap-1 hover:bg-gray-100 dark:hover:bg-gray-700 px-2 py-1 rounded text-gray-700 dark:text-gray-300"
+            onClick={() => column.toggleSorting()}
+          >
+            Pricing
+            {column.getIsSorted() === 'asc' ? (
+              <ArrowUp className="h-4 w-4" />
+            ) : column.getIsSorted() === 'desc' ? (
+              <ArrowDown className="h-4 w-4" />
+            ) : (
+              <ArrowUpDown className="h-4 w-4" />
+            )}
+          </button>
+        ),
+        sortingFn: (rowA, rowB) => {
+          const a = rowA.original
+          const b = rowB.original
+
+          // Бесплатные модели идут первыми, затем по цене
+          if (a.isFree && !b.isFree) return -1
+          if (!a.isFree && b.isFree) return 1
+
+          // Если обе платные, сортируем по цене
+          const priceA = a.pricingInput || 0
+          const priceB = b.pricingInput || 0
+          return priceA - priceB
+        },
         cell: ({ row }) => (
           <div className="text-xs">
             {row.original.pricingInput ? (
               <div className="flex items-center">
-                <DollarSign className="h-3 w-3 mr-1 text-gray-400" />
-                <span className="font-medium">${row.original.pricingInput}</span>
-                <span className="text-gray-500">/1K</span>
+                <DollarSign className="h-3 w-3 mr-1 text-gray-400 dark:text-gray-500" />
+                <span className="font-medium text-gray-900 dark:text-gray-100">${row.original.pricingInput}</span>
+                <span className="text-gray-600 dark:text-gray-400">/1K</span>
               </div>
             ) : (
-              <span className="text-gray-400">N/A</span>
+              <span className="text-gray-500 dark:text-gray-400">N/A</span>
             )}
           </div>
         )
       },
       {
         accessorKey: 'contextWindow',
-        header: 'Context',
+        header: ({ column }) => (
+          <button
+            className="flex items-center gap-1 hover:bg-gray-100 dark:hover:bg-gray-700 px-2 py-1 rounded text-gray-700 dark:text-gray-300"
+            onClick={() => column.toggleSorting()}
+          >
+            Context
+            {column.getIsSorted() === 'asc' ? (
+              <ArrowUp className="h-4 w-4" />
+            ) : column.getIsSorted() === 'desc' ? (
+              <ArrowDown className="h-4 w-4" />
+            ) : (
+              <ArrowUpDown className="h-4 w-4" />
+            )}
+          </button>
+        ),
+        sortingFn: (rowA, rowB) => {
+          const a = rowA.original.contextWindow || 0
+          const b = rowB.original.contextWindow || 0
+          return b - a // По убыванию (больший контекст выше)
+        },
         cell: ({ row }) => (
-          <span className="text-xs font-medium">
+          <span className="text-xs font-medium text-gray-900 dark:text-gray-100">
             {row.original.contextWindow ? `${row.original.contextWindow}K` : 'N/A'}
           </span>
         )
@@ -317,10 +393,10 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
         cell: ({ row }) => (
           <button
             onClick={() => openBenchmarkDetails(row.original.id, row.original.displayName)}
-            className="text-xs hover:bg-blue-50 px-2 py-1 rounded transition-colors"
+            className="text-xs hover:bg-blue-50 dark:hover:bg-blue-900/20 px-2 py-1 rounded transition-colors"
           >
-            <span className="font-medium text-blue-600">{row.original.totalBenchmarks}</span>
-            <span className="text-gray-500 ml-1">sources</span>
+            <span className="font-medium text-blue-600 dark:text-blue-400">{row.original.totalBenchmarks}</span>
+            <span className="text-gray-600 dark:text-gray-400 ml-1">sources</span>
           </button>
         )
       },
@@ -330,7 +406,7 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
         cell: ({ row }) => (
           <button
             onClick={() => openRatingForm(row.original.id, row.original.displayName)}
-            className="inline-flex items-center px-3 py-1 text-xs font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="inline-flex items-center px-3 py-1 text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
           >
             <MessageSquare className="h-3 w-3 mr-1" />
             Rate
@@ -366,21 +442,21 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
   }
 
   return (
-    <div className="bg-white shadow-sm rounded-lg border border-gray-200">
+    <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg border border-gray-200 dark:border-gray-700">
       {/* Фильтры */}
-      <div className="p-4 border-b border-gray-200">
+      <div className="p-4 border-b border-gray-200 dark:border-gray-700">
         <div className="flex flex-col sm:flex-row gap-4">
           <input
             type="text"
             placeholder="Search models..."
             value={globalFilter}
             onChange={(e) => setGlobalFilter(e.target.value)}
-            className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent"
           />
           <select
             value={table.getColumn('category')?.getFilterValue() as string || ''}
             onChange={(e) => table.getColumn('category')?.setFilterValue(e.target.value)}
-            className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent"
           >
             <option value="">All Categories</option>
             <option value="coding">Coding</option>
@@ -393,14 +469,14 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
 
       {/* Таблица */}
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+          <thead className="bg-gray-50 dark:bg-gray-900">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <th
                     key={header.id}
-                    className="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider"
                   >
                     {header.isPlaceholder
                       ? null
@@ -410,10 +486,10 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
               </tr>
             ))}
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
             {table.getRowModel().rows.length > 0 ? (
               table.getRowModel().rows.map((row) => (
-                <tr key={row.id} className="hover:bg-gray-50">
+                <tr key={row.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
                   {row.getVisibleCells().map((cell) => (
                     <td key={cell.id} className="px-3 py-3 whitespace-nowrap text-sm">
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -423,7 +499,7 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
               ))
             ) : (
               <tr>
-                <td colSpan={columns.length} className="px-3 py-4 text-center text-gray-500">
+                <td colSpan={columns.length} className="px-3 py-4 text-center text-gray-500 dark:text-gray-400">
                   No models found
                 </td>
               </tr>
@@ -433,9 +509,9 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
       </div>
 
       {/* Пагинация */}
-      <div className="px-4 py-3 border-t border-gray-200 sm:px-6">
+      <div className="px-4 py-3 border-t border-gray-200 dark:border-gray-700 sm:px-6">
         <div className="flex items-center justify-between">
-          <div className="text-sm text-gray-700">
+          <div className="text-sm text-gray-700 dark:text-gray-300">
             Showing {table.getRowModel().rows.length} of {modelsWithMetrics.length} models
           </div>
         </div>

@@ -17,25 +17,25 @@ export function SyncStatus({ status }: SyncStatusProps) {
         return {
           icon: <Loader className="h-5 w-5 animate-spin" />,
           message: 'Synchronizing data...',
-          bgColor: 'bg-blue-50',
-          textColor: 'text-blue-800',
-          borderColor: 'border-blue-200'
+          bgColor: 'bg-blue-50 dark:bg-blue-900/20',
+          textColor: 'text-blue-800 dark:text-blue-200',
+          borderColor: 'border-blue-200 dark:border-blue-800'
         }
       case 'success':
         return {
           icon: <CheckCircle className="h-5 w-5" />,
           message: 'Data synchronized successfully!',
-          bgColor: 'bg-green-50',
-          textColor: 'text-green-800',
-          borderColor: 'border-green-200'
+          bgColor: 'bg-green-50 dark:bg-green-900/20',
+          textColor: 'text-green-800 dark:text-green-200',
+          borderColor: 'border-green-200 dark:border-green-800'
         }
       case 'error':
         return {
           icon: <XCircle className="h-5 w-5" />,
           message: 'Failed to synchronize data. Please try again.',
-          bgColor: 'bg-red-50',
-          textColor: 'text-red-800',
-          borderColor: 'border-red-200'
+          bgColor: 'bg-red-50 dark:bg-red-900/20',
+          textColor: 'text-red-800 dark:text-red-200',
+          borderColor: 'border-red-200 dark:border-red-800'
         }
       default:
         return null
