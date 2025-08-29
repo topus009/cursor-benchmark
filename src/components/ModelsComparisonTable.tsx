@@ -253,6 +253,146 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
         )
       },
       {
+        id: 'costValue',
+        header: ({ column }) => (
+          <button
+            className="flex items-center gap-1 hover:bg-gray-100 dark:hover:bg-gray-700 px-2 py-1 rounded text-gray-700 dark:text-gray-300"
+            onClick={() => column.toggleSorting()}
+          >
+            Cost/Value
+            {column.getIsSorted() === 'asc' ? (
+              <ArrowUp className="h-4 w-4" />
+            ) : column.getIsSorted() === 'desc' ? (
+              <ArrowDown className="h-4 w-4" />
+            ) : (
+              <ArrowUpDown className="h-4 w-4" />
+            )}
+          </button>
+        ),
+        accessorFn: (row) => {
+          // Функция для расчета Cost/Value скора
+          const calculateScore = (model: any) => {
+            let qualityScore = 0;
+            if (model.avgRating) qualityScore += model.avgRating * 1.2;
+            if (model.passRate) qualityScore += model.passRate / 10;
+            qualityScore = Math.min(10, qualityScore);
+
+            let speedScore = 5;
+            if (model.avgResponseTime) {
+              speedScore = Math.max(0, Math.min(10, 10 - (model.avgResponseTime / 1000)));
+            }
+
+            let costScore = 1;
+            if (model.pricingInput && !model.isFree) {
+              costScore = Math.max(0.1, Math.min(5, 5 / (1 + model.pricingInput * 1000)));
+            }
+
+            return (qualityScore + speedScore) / costScore;
+          };
+
+          return calculateScore(row);
+        },
+        sortingFn: (rowA, rowB) => {
+          // Функция для расчета Cost/Value скора
+          const calculateScore = (row: any) => {
+            let qualityScore = 0;
+            if (row.avgRating) qualityScore += row.avgRating * 1.2;
+            if (row.passRate) qualityScore += row.passRate / 10;
+            qualityScore = Math.min(10, qualityScore);
+
+            let speedScore = 5;
+            if (row.avgResponseTime) {
+              speedScore = Math.max(0, Math.min(10, 10 - (row.avgResponseTime / 1000)));
+            }
+
+            let costScore = 1;
+            if (row.pricingInput && !row.isFree) {
+              costScore = Math.max(0.1, Math.min(5, 5 / (1 + row.pricingInput * 1000)));
+            }
+
+            return (qualityScore + speedScore) / costScore;
+          };
+
+          const scoreA = calculateScore(rowA.original);
+          const scoreB = calculateScore(rowB.original);
+
+          return scoreA - scoreB; // По возрастанию (меньшие значения первыми)
+        },
+        cell: ({ row }) => {
+          // Повторяем расчет для отображения
+          let qualityScore = 0;
+          if (row.original.avgRating) qualityScore += row.original.avgRating * 1.2;
+          if (row.original.passRate) qualityScore += row.original.passRate / 10;
+          qualityScore = Math.min(10, qualityScore);
+
+          let speedScore = 5;
+          if (row.original.avgResponseTime) {
+            speedScore = Math.max(0, Math.min(10, 10 - (row.original.avgResponseTime / 1000)));
+          }
+
+          let costScore = 1;
+          if (row.original.pricingInput && !row.original.isFree) {
+            costScore = Math.max(0.1, Math.min(5, 5 / (1 + row.original.pricingInput * 1000)));
+          }
+
+          const totalScore = (qualityScore + speedScore) / costScore;
+          const hasData = row.original.benchmarkResults?.length > 0 || row.original.userRatings?.length > 0;
+
+          // Определяем уровень и иконку
+          const getCostValueInfo = (score: number) => {
+            if (score > 15) {
+              return {
+                icon: '🚀',
+                level: 'excellent',
+                color: 'text-green-600 dark:text-green-400',
+                tooltip: 'Отличное соотношение цена/качество'
+              };
+            } else if (score >= 5) {
+              return {
+                icon: '✅',
+                level: 'good',
+                color: 'text-blue-600 dark:text-blue-400',
+                tooltip: 'Хорошее соотношение цена/качество'
+              };
+            } else {
+              return {
+                icon: '⚠️',
+                level: 'poor',
+                color: 'text-orange-600 dark:text-orange-400',
+                tooltip: 'Дорого или низкое качество'
+              };
+            }
+          };
+
+          const costValueInfo = hasData ? getCostValueInfo(totalScore) : null;
+
+          return (
+            <div className="text-xs flex justify-center">
+              {hasData ? (
+                <div className="flex items-center gap-1">
+                  <span className={`font-medium text-gray-900 dark:text-gray-100 ${costValueInfo?.color || ''}`}>
+                    {totalScore.toFixed(1)}
+                  </span>
+                  {costValueInfo && (
+                    <span
+                      className="text-xs"
+                      title={costValueInfo.tooltip}
+                    >
+                      {costValueInfo.icon}
+                    </span>
+                  )}
+                </div>
+              ) : (
+                <div className="flex items-center gap-1">
+                  <span className="text-gray-500 dark:text-gray-400 font-medium">N/A</span>
+                  <span className="text-gray-400 dark:text-gray-500 text-xs">❓</span>
+                </div>
+              )}
+            </div>
+          );
+        }
+      },
+      {
         id: 'performance',
         accessorFn: (row) => {
           // Вычисляем общий скор производительности (0-10 шкала)
@@ -286,7 +426,16 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
               {model.avgResponseTime && (
                 <div className="flex items-center text-xs">
                   <Clock className="h-3 w-3 mr-1 text-gray-400 dark:text-gray-500" />
-                  <span className="font-medium text-gray-900 dark:text-gray-100">{model.avgResponseTime}s</span>
+                  <span className={`font-medium ${
+                    model.avgResponseTime < 1 ? 'text-green-600 dark:text-green-400' :
+                    model.avgResponseTime < 3 ? 'text-yellow-600 dark:text-yellow-400' :
+                    'text-red-600 dark:text-red-400'
+                  }`}>
+                    {model.avgResponseTime < 1
+                      ? `${(model.avgResponseTime * 1000).toFixed(0)}ms`
+                      : `${model.avgResponseTime.toFixed(1)}s`
+                    }
+                  </span>
                 </div>
               )}
 
@@ -393,7 +542,7 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
         },
         cell: ({ row }) => (
           <span className="text-xs font-medium text-gray-900 dark:text-gray-100">
-            {row.original.contextWindow ? `${row.original.contextWindow}K` : 'N/A'}
+            {row.original.contextWindow ? `${row.original.contextWindow.toLocaleString()} K` : 'N/A'}
           </span>
         )
       },
