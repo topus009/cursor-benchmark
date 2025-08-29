@@ -14,7 +14,8 @@
     "check:models": "node scripts/check-models.js",
     "restore:cursor-icons": "node scripts/add-cursor-icons.js",
     "remove:cursor-icons": "node scripts/remove-cursor-icons.js",
-    "update:models": "node scripts/update-models.js"
+    "update:models": "node scripts/update-models.js",
+    "add:test-data": "node scripts/add-test-data.js"
   },
   "dependencies": {
     "@prisma/client": "^6.15.0",

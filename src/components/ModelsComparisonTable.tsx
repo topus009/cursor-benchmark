@@ -257,6 +257,14 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
       },
       {
         id: 'performance',
+        accessorFn: (row) => {
+          // Вычисляем общий скор производительности (0-10 шкала)
+          let score = 0
+          if (row.avgRating) score += row.avgRating * 1.5 // Рейтинг весит больше
+          if (row.passRate) score += row.passRate * 5 // Качество кода
+          if (row.avgResponseTime) score -= Math.min(row.avgResponseTime / 10, 2) // Штраф за медленность
+          return Math.max(0, Math.min(10, score))
+        },
         header: ({ column }) => (
           <button
             className="flex items-center gap-1 hover:bg-gray-100 dark:hover:bg-gray-700 px-2 py-1 rounded text-gray-700 dark:text-gray-300"
@@ -272,22 +280,7 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
             )}
           </button>
         ),
-        sortingFn: (rowA, rowB) => {
-          // Сортировка по комплексной метрике производительности
-          const a = rowA.original
-          const b = rowB.original
-
-          // Вычисляем общий скор производительности (0-10 шкала)
-          const getPerfScore = (model: typeof a) => {
-            let score = 0
-            if (model.avgRating) score += model.avgRating * 1.5 // Рейтинг весит больше
-            if (model.passRate) score += model.passRate * 5 // Качество кода
-            if (model.avgResponseTime) score -= Math.min(model.avgResponseTime / 10, 2) // Штраф за медленность
-            return Math.max(0, Math.min(10, score))
-          }
-
-          return getPerfScore(b) - getPerfScore(a) // По убыванию
-        },
+        sortingFn: 'alphanumeric',
         cell: ({ row }) => {
           const model = row.original
           return (
@@ -335,6 +328,11 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
       },
       {
         id: 'pricing',
+        accessorFn: (row) => {
+          // Возвращаем специальное значение для бесплатных моделей
+          if (row.isFree) return -1
+          return row.pricingInput || 999999 // Высокое значение для моделей без цены
+        },
         header: ({ column }) => (
           <button
             className="flex items-center gap-1 hover:bg-gray-100 dark:hover:bg-gray-700 px-2 py-1 rounded text-gray-700 dark:text-gray-300"
@@ -350,19 +348,7 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
             )}
           </button>
         ),
-        sortingFn: (rowA, rowB) => {
-          const a = rowA.original
-          const b = rowB.original
-
-          // Бесплатные модели идут первыми, затем по цене
-          if (a.isFree && !b.isFree) return -1
-          if (!a.isFree && b.isFree) return 1
-
-          // Если обе платные, сортируем по цене
-          const priceA = a.pricingInput || 0
-          const priceB = b.pricingInput || 0
-          return priceA - priceB
-        },
+        sortingFn: 'alphanumeric',
         cell: ({ row }) => (
           <div className="text-xs">
             {row.original.pricingInput ? (
