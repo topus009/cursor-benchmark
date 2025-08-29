@@ -1,36 +1,213 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Models Performance Dashboard
 
-## Getting Started
+Дашборд для сравнения производительности AI моделей в Cursor с автоматическим сбором данных из различных источников бенчмарков.
 
-First, run the development server:
+## 🚀 Особенности
+
+- **Сравнение моделей**: Красивая таблица с фильтрами и сортировкой для сравнения AI моделей
+- **Автоматический сбор данных**: Синхронизация данных из официальных источников и бенчмарков
+- **Множественные источники**: Поддержка данных из Aider, HumanEval, внутренних тестов Cursor
+- **Пользовательские оценки**: Система рейтингов и отзывов от пользователей
+- **Автообновление**: Планировщик с cron jobs для регулярной синхронизации
+- **Современный UI**: React + Next.js + Tailwind CSS
+
+## 📊 Метрики производительности
+
+- Скорость ответа (response time)
+- Качество кода (pass rate)
+- Успешность выполнения задач (success rate)
+- Пользовательские рейтинги (speed, quality, cost)
+- Ценообразование (input/output pricing)
+
+## 🛠 Технологии
+
+- **Frontend**: Next.js 15, React 18, TypeScript
+- **UI**: Tailwind CSS, Lucide Icons
+- **Database**: SQLite + Prisma ORM
+- **Tables**: TanStack Table
+- **Charts**: Recharts
+- **Scheduling**: Node-cron
+
+## 🚀 Быстрый старт
+
+### 1. Клонирование и установка
+
+```bash
+git clone <repository-url>
+cd cursor-benchmark
+npm install
+```
+
+### 2. Настройка базы данных
+
+```bash
+# Генерация Prisma клиента
+npx prisma generate
+
+# Создание и применение миграций
+npx prisma db push
+```
+
+### 3. Запуск сервера разработки
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Откройте [http://localhost:3000](http://localhost:3000) в браузере.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Структура проекта
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+cursor-benchmark/
+├── src/
+│   ├── app/                    # Next.js App Router
+│   │   ├── api/               # API маршруты
+│   │   │   ├── models/        # API моделей
+│   │   │   ├── benchmarks/    # API бенчмарков
+│   │   │   ├── ratings/       # API оценок
+│   │   │   └── scheduler/     # API планировщика
+│   │   ├── admin/             # Админ панель
+│   │   └── page.tsx           # Главная страница
+│   ├── components/            # React компоненты
+│   │   ├── admin/            # Компоненты админки
+│   │   ├── ModelsComparisonTable.tsx
+│   │   ├── DashboardHeader.tsx
+│   │   └── SyncStatus.tsx
+│   ├── lib/                  # Утилиты и сервисы
+│   │   ├── prisma.ts         # Prisma клиент
+│   │   ├── services/         # Бизнес-логика
+│   │   │   ├── cursor-models.service.ts
+│   │   │   ├── benchmark.service.ts
+│   │   │   └── scheduler.service.ts
+│   │   └── utils.ts          # Вспомогательные функции
+│   └── generated/            # Сгенерированные файлы Prisma
+├── prisma/
+│   └── schema.prisma         # Схема базы данных
+└── package.json
+```
 
-## Learn More
+## 🔧 API Endpoints
 
-To learn more about Next.js, take a look at the following resources:
+### Модели
+- `GET /api/models` - Получить все модели
+- `POST /api/models` - Синхронизировать модели
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Бенчмарки
+- `GET /api/benchmarks` - Получить бенчмарки
+- `POST /api/benchmarks` - Синхронизировать бенчмарки
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Оценки
+- `GET /api/ratings` - Получить оценки пользователей
+- `POST /api/ratings` - Создать оценку
 
-## Deploy on Vercel
+### Планировщик
+- `GET /api/scheduler` - Получить статус планировщика
+- `POST /api/scheduler` - Управление планировщиком
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🗄 Схема базы данных
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Основные таблицы:
+- **AIModel**: Информация о моделях
+- **BenchmarkResult**: Результаты бенчмаркинга
+- **BenchmarkSource**: Источники бенчмарков
+- **UserRating**: Пользовательские оценки
+- **SystemConfig**: Системные настройки
+
+## 🔄 Система обновления данных
+
+### Автоматическая синхронизация:
+- **Модели**: Каждый час
+- **Бенчмарки**: Каждые 6 часов
+- **Полная синхронизация**: Каждый день в 2:00
+
+### Ручная синхронизация:
+- Через админ панель (`/admin`)
+- Через API endpoints
+- Через кнопки в интерфейсе
+
+## 🎯 Источники данных
+
+### Официальные:
+- [Cursor Models](https://cursor.sh/docs/models)
+- [Monnef Comparison](https://by-ai-monnef-9ff5d9c2460ae15d70e737f77eab719c6e8a4c64c2f99ca1c2.gitlab.io/2025/cursor_models_comparison/)
+
+### Бенчмарки (25+ источников):
+
+#### Coding Benchmarks:
+- [Aider Benchmarks](https://aider.chat/docs/benchmarks/) - Real-world coding tasks
+- [HumanEval](https://github.com/openai/human-eval) - Programming problems
+- [MBPP](https://github.com/google-research/google-research/tree/master/mbpp) - Basic programming problems
+- [CodeForces](https://codeforces.com/) - Competitive programming
+
+#### Knowledge & Reasoning:
+- [MMLU](https://github.com/hendrycks/test) - Massive multitask language understanding
+- [ARC](https://allenai.org/data/arc) - AI2 Reasoning Challenge
+- [HellaSwag](https://rowanzellers.com/hellaswag/) - Commonsense reasoning
+- [Winogrande](https://winogrande.allenai.org/) - Winograd Schema Challenge
+
+#### Math & Science:
+- [GSM8K](https://github.com/openai/grade-school-math) - Grade school math
+- [MATH](https://github.com/hendrycks/math) - Competition mathematics
+- [GPQA](https://github.com/idavidrein/gpqa) - Google-Proof Q&A
+- [AGIEval](https://github.com/microsoft/AGIEval) - AGI evaluation
+
+#### Multilingual & Chat:
+- [XQuAD](https://github.com/deepmind/xquad) - Cross-lingual QA
+- [XNLI](https://github.com/facebookresearch/XNLI) - Cross-lingual NLI
+- [MT-Bench](https://github.com/lm-sys/FastChat) - Multi-turn conversations
+- [Chatbot Arena](https://chat.lmsys.org/) - Human preference evaluation
+
+#### Leaderboards & Comprehensive:
+- [Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard)
+- [Chatbot Arena Leaderboard](https://huggingface.co/spaces/lmsys/chatbot-arena-leaderboard)
+
+### Дополнительно:
+- Внутренние тесты Cursor
+- Пользовательские оценки и отзывы
+
+## 🚢 Деплой
+
+### Vercel (рекомендуется)
+```bash
+npm run build
+vercel --prod
+```
+
+### Docker
+```dockerfile
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+RUN npm run build
+EXPOSE 3000
+CMD ["npm", "start"]
+```
+
+## 🤝 Contributing
+
+1. Fork проект
+2. Создайте feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit изменения (`git commit -m 'Add some AmazingFeature'`)
+4. Push в branch (`git push origin feature/AmazingFeature`)
+5. Создайте Pull Request
+
+## 📝 Лицензия
+
+Этот проект распространяется под лицензией MIT. См. файл `LICENSE` для подробностей.
+
+## 📞 Контакты
+
+- GitHub: [ссылка на репозиторий]
+- Email: ваш-email@example.com
+
+## 🔮 Планы развития
+
+- [ ] Интеграция с реальными API Cursor
+- [ ] Расширенные графики и аналитика
+- [ ] Экспорт данных в различные форматы
+- [ ] API для внешних интеграций
+- [ ] Мобильное приложение
+- [ ] Поддержка дополнительных источников бенчмарков

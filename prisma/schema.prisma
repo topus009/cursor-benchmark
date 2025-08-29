@@ -1,0 +1,108 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model AIModel {
+  id                String   @id @default(cuid())
+  name              String
+  provider          String
+  modelId           String   @unique
+  displayName       String
+  description       String?
+  contextWindow     Int?
+  maxTokens         Int?
+  pricingInput      Float?   // цена за 1K токенов input
+  pricingOutput     Float?   // цена за 1K токенов output
+  isFree            Boolean  @default(false)
+  isRecommended     Boolean  @default(false)
+  category          String   // chat, coding, vision, etc.
+  capabilities      String   // JSON массив возможностей
+  releaseDate       DateTime?
+  lastUpdated       DateTime @updatedAt
+  createdAt         DateTime @default(now())
+
+  // Связи
+  benchmarkResults  BenchmarkResult[]
+  userRatings       UserRating[]
+
+  @@map("ai_models")
+}
+
+model BenchmarkResult {
+  id                String   @id @default(cuid())
+  modelId           String
+  sourceId          String
+  benchmarkType     String   // aider, humaneval, etc.
+  metricName        String   // accuracy, speed, quality, etc.
+  metricValue       Float
+  unit              String?  // %, tokens/sec, etc.
+  confidence        Float?   // уровень уверенности в результате
+  sampleSize        Int?     // размер выборки для теста
+  testDate          DateTime
+  lastUpdated       DateTime @updatedAt
+  createdAt         DateTime @default(now())
+
+  // Связи
+  model             AIModel  @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  source            BenchmarkSource @relation(fields: [sourceId], references: [id])
+
+  @@unique([modelId, sourceId, benchmarkType, metricName])
+  @@map("benchmark_results")
+}
+
+model BenchmarkSource {
+  id                String   @id @default(cuid())
+  name              String   @unique
+  displayName       String
+  description       String?
+  url               String?
+  category          String   // aider, cursor, independent, etc.
+  isAutomated       Boolean  @default(true)
+  updateFrequency   String?  // daily, weekly, manual
+  lastFetched       DateTime?
+  createdAt         DateTime @default(now())
+
+  // Связи
+  benchmarkResults  BenchmarkResult[]
+
+  @@map("benchmark_sources")
+}
+
+model UserRating {
+  id                String   @id @default(cuid())
+  modelId           String
+  userId            String?  // для анонимных отзывов может быть null
+  sessionId         String   // для отслеживания сессий
+  rating            Int      // 1-5 звезды
+  speedRating       Int?     // 1-5 скорость ответа
+  qualityRating     Int?     // 1-5 качество кода
+  costRating        Int?     // 1-5 соотношение цена/качество
+  comment           String?
+  taskType          String?  // тип задачи (coding, chat, analysis)
+  createdAt         DateTime @default(now())
+
+  // Связи
+  model             AIModel  @relation(fields: [modelId], references: [id], onDelete: Cascade)
+
+  @@map("user_ratings")
+}
+
+model SystemConfig {
+  id                String   @id @default(cuid())
+  key               String   @unique
+  value             String
+  description       String?
+  lastUpdated       DateTime @updatedAt
+  createdAt         DateTime @default(now())
+
+  @@map("system_config")
+}
