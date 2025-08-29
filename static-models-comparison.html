@@ -1,0 +1,2753 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Models Comparison - Static Version</title>
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Base styles */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #374151;
+            background-color: #f9fafb;
+        }
+
+        .dark {
+            color: #f9fafb;
+            background-color: #111827;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        .header {
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .dark .header {
+            background-color: #1f2937;
+            border-bottom-color: #374151;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        .header-title {
+            font-size: 1.875rem;
+            font-weight: bold;
+            color: #111827;
+        }
+
+        .dark .header-title {
+            color: #f9fafb;
+        }
+
+        .header-subtitle {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .dark .header-subtitle {
+            color: #9ca3af;
+        }
+
+        /* Stats */
+        .stats {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .dark .stats {
+            color: #9ca3af;
+        }
+
+        /* Theme toggle */
+        .theme-toggle {
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            background-color: #f3f4f6;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background-color: #e5e7eb;
+        }
+
+        .dark .theme-toggle {
+            background-color: #374151;
+        }
+
+        .dark .theme-toggle:hover {
+            background-color: #4b5563;
+        }
+
+        /* Filters */
+        .filters {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .dark .filters {
+            background-color: #1f2937;
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            align-items: end;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.25rem;
+        }
+
+        .dark .filter-label {
+            color: #f3f4f6;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            color: #374151;
+            font-size: 0.875rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .dark .search-input {
+            background-color: #1f2937;
+            border-color: #4b5563;
+            color: #f9fafb;
+        }
+
+        .filter-select {
+            padding: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            color: #374151;
+            font-size: 0.875rem;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        .dark .filter-select {
+            background-color: #1f2937;
+            border-color: #4b5563;
+            color: #f9fafb;
+        }
+
+        /* Table */
+        .table-container {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin: 1.5rem 0;
+        }
+
+        .dark .table-container {
+            background-color: #1f2937;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-header {
+            background-color: #f9fafb;
+        }
+
+        .dark .table-header {
+            background-color: #374151;
+        }
+
+        .table-cell {
+            padding: 0.75rem;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+            vertical-align: middle;
+        }
+
+        .dark .table-cell {
+            border-bottom-color: #374151;
+        }
+
+        .table-cell:first-child {
+            text-align: left;
+            padding-left: 1.5rem;
+        }
+
+        .table-header .table-cell {
+            font-weight: 600;
+            color: #374151;
+            border-bottom: none;
+        }
+
+        .dark .table-header .table-cell {
+            color: #f9fafb;
+        }
+
+        .table-body .table-cell {
+            color: #374151;
+        }
+
+        .dark .table-body .table-cell {
+            color: #f9fafb;
+        }
+
+        .table-row:hover {
+            background-color: #f9fafb;
+        }
+
+        .dark .table-row:hover {
+            background-color: #374151;
+        }
+
+        /* Sort buttons */
+        .sort-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            border: none;
+            background: transparent;
+            color: #374151;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .sort-button:hover {
+            background-color: #f3f4f6;
+        }
+
+        .dark .sort-button {
+            color: #f9fafb;
+        }
+
+        .dark .sort-button:hover {
+            background-color: #4b5563;
+        }
+
+        /* Model name styling */
+        .model-name {
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.125rem;
+        }
+
+        .dark .model-name {
+            color: #f9fafb;
+        }
+
+        .model-provider {
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        .dark .model-provider {
+            color: #9ca3af;
+        }
+
+        /* Icons */
+        .icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            font-size: 0.75rem;
+        }
+
+        .icon-blue {
+            background-color: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .dark .icon-blue {
+            background-color: #1e3a8a;
+            color: #60a5fa;
+        }
+
+        .icon-purple {
+            background-color: #ede9fe;
+            color: #7c3aed;
+        }
+
+        .dark .icon-purple {
+            background-color: #2d1b69;
+            color: #a78bfa;
+        }
+
+        .icon-green {
+            background-color: #dcfce7;
+            color: #16a34a;
+        }
+
+        .dark .icon-green {
+            background-color: #14532d;
+            color: #4ade80;
+        }
+
+        /* Colors for values */
+        .text-green { color: #16a34a; }
+        .dark .text-green { color: #4ade80; }
+        .text-blue { color: #2563eb; }
+        .dark .text-blue { color: #60a5fa; }
+        .text-yellow { color: #ca8a04; }
+        .dark .text-yellow { color: #facc15; }
+        .text-orange { color: #ea580c; }
+        .dark .text-orange { color: #fb923c; }
+        .text-red { color: #dc2626; }
+        .dark .text-red { color: #f87171; }
+        .text-gray { color: #6b7280; }
+        .dark .text-gray { color: #9ca3af; }
+
+        /* Flex utilities */
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .gap-1 { gap: 0.25rem; }
+        .gap-2 { gap: 0.5rem; }
+
+        /* Font weights */
+        .font-medium { font-weight: 500; }
+        .font-semibold { font-weight: 600; }
+        .font-bold { font-weight: 700; }
+
+        /* Text sizes */
+        .text-xs { font-size: 0.75rem; }
+        .text-sm { font-size: 0.875rem; }
+        .text-lg { font-size: 1.125rem; }
+        .text-xl { font-size: 1.25rem; }
+        .text-2xl { font-size: 1.5rem; }
+        .text-3xl { font-size: 1.875rem; }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: #6b7280;
+        }
+
+        .dark .footer {
+            color: #9ca3af;
+        }
+
+        /* Loading animation */
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        /* Sort icons */
+        .sort-icon {
+            font-size: 0.75rem;
+            margin-left: 0.25rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 0.5rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .filters-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .table-container {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <div id="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <div>
+                        <h1 class="header-title">
+                            🤖 AI Models Comparison
+                        </h1>
+                        <p class="header-subtitle">
+                            Compare AI models by performance, pricing, and capabilities
+                        </p>
+                    </div>
+                    <div class="stats">
+                        <div>Total: <span id="total-models" class="font-semibold">0</span></div>
+                        <div>Cursor: <span id="cursor-models" class="font-semibold">0</span></div>
+                        <button id="theme-toggle" class="theme-toggle">
+                            <span id="sun-icon" class="hidden">☀️</span>
+                            <span id="moon-icon">🌙</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Filters -->
+        <div class="container">
+            <div class="filters">
+                <div class="filters-grid">
+                    <div class="filter-group">
+                        <label class="filter-label">
+                            🔍 Search Models
+                        </label>
+                        <input
+                            type="text"
+                            id="search-input"
+                            class="search-input"
+                            placeholder="Search by name or provider..."
+                        >
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">
+                            🏢 Provider
+                        </label>
+                        <select id="provider-filter" class="filter-select">
+                            <option value="">All Providers</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">
+                            ⚡ Capabilities
+                        </label>
+                        <select id="capability-filter" class="filter-select">
+                            <option value="">All Models</option>
+                            <option value="cursor">Available in Cursor</option>
+                            <option value="reasoning">With Reasoning</option>
+                            <option value="agent">Agent Capabilities</option>
+                            <option value="free">Free Models</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="container">
+            <div class="table-container">
+                <div style="overflow-x: auto;">
+                    <table id="models-table" class="table">
+                        <thead class="table-header">
+                            <tr>
+                                <th class="table-cell text-left">
+                                    Model
+                                </th>
+                                <th class="table-cell">
+                                    <button id="sort-cost-value" class="sort-button">
+                                        Cost/Value
+                                        <span class="sort-icon">⇅</span>
+                                    </button>
+                                </th>
+                                <th class="table-cell">
+                                    <button id="sort-speed" class="sort-button">
+                                        Speed
+                                        <span class="sort-icon">⇅</span>
+                                    </button>
+                                </th>
+                                <th class="table-cell">
+                                    <button id="sort-quality" class="sort-button">
+                                        Quality
+                                        <span class="sort-icon">⇅</span>
+                                    </button>
+                                </th>
+                                <th class="table-cell">
+                                    <button id="sort-pricing" class="sort-button">
+                                        Pricing
+                                        <span class="sort-icon">⇅</span>
+                                    </button>
+                                </th>
+                                <th class="table-cell">
+                                    <button id="sort-context" class="sort-button">
+                                        Context
+                                        <span class="sort-icon">⇅</span>
+                                    </button>
+                                </th>
+                                <th class="table-cell">
+                                    <button id="sort-aider" class="sort-button">
+                                        Aider
+                                        <span class="sort-icon">⇅</span>
+                                    </button>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="models-tbody" class="table-body">
+                            <!-- Models will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="container footer">
+            <p>🚀 Static version with dynamic data • Generated on <span id="generated-date"></span></p>
+            <p style="margin-top: 0.5rem;">📊 Data populated via update script • Compare AI models by performance, pricing, and capabilities</p>
+        </footer>
+    </div>
+
+    <!-- Placeholder for data - will be populated by update script -->
+    <script id="models-data" type="application/json">
+{
+  "models": [
+    {
+      "id": "cmewtbrxp0002lcikxx1jjnm8",
+      "name": "claude-3-haiku-20240307",
+      "displayName": "Claude 3 Haiku",
+      "provider": "Anthropic",
+      "description": "Fast and efficient for simple tasks",
+      "contextWindow": 200000,
+      "pricingInput": 0.00025,
+      "pricingOutput": 0.00125,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": true,
+      "category": "chat",
+      "capabilities": [
+        "tool_use",
+        "function_calling",
+        "multi_step_reasoning"
+      ],
+      "avgRating": 4.2,
+      "avgResponseTime": 4333,
+      "totalRatings": 6,
+      "passRate": 0.75,
+      "aiderBenchmark": 85,
+      "costValueScore": 2.7,
+      "totalBenchmarks": 15
+    },
+    {
+      "id": "cmewubd2u008zlcdoxqw5oeon",
+      "name": "claude-3-opus-20240229",
+      "displayName": "Claude 3 Opus",
+      "provider": "Anthropic",
+      "description": "Most capable model for highly complex tasks",
+      "contextWindow": 200000,
+      "pricingInput": 0.015,
+      "pricingOutput": 0.075,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": true,
+      "category": "coding",
+      "capabilities": [
+        "tool_use",
+        "function_calling",
+        "multi_step_reasoning"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.76,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd340090lcdo4uwipt4j",
+      "name": "claude-3-sonnet-20240229",
+      "displayName": "Claude 3 Sonnet",
+      "provider": "Anthropic",
+      "description": "Balanced model for general tasks",
+      "contextWindow": 200000,
+      "pricingInput": 0.003,
+      "pricingOutput": 0.015,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": true,
+      "category": "chat",
+      "capabilities": [
+        "tool_use",
+        "function_calling",
+        "multi_step_reasoning"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.72,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd2l008ylcdoccig6hnw",
+      "name": "claude-3-5-haiku-20241022",
+      "displayName": "Claude 3.5 Haiku",
+      "provider": "Anthropic",
+      "description": "Fast and efficient model for general tasks",
+      "contextWindow": 200000,
+      "pricingInput": 0.0008,
+      "pricingOutput": 0.004,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": false,
+      "category": "chat",
+      "capabilities": [
+        "chat",
+        "analysis",
+        "writing",
+        "summarization"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.99,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewtbrws0000lcik751r1yol",
+      "name": "claude-3-5-sonnet-20241022",
+      "displayName": "Claude 3.5 Sonnet",
+      "provider": "Anthropic",
+      "description": "Most intelligent model for complex reasoning and coding tasks",
+      "contextWindow": 200000,
+      "pricingInput": 0.003,
+      "pricingOutput": 0.015,
+      "isFree": false,
+      "isRecommended": true,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": true,
+      "category": "coding",
+      "capabilities": [
+        "tool_use",
+        "function_calling",
+        "multi_step_reasoning",
+        "code_generation",
+        "analysis"
+      ],
+      "avgRating": 4.8,
+      "avgResponseTime": 4667,
+      "totalRatings": 6,
+      "passRate": 0.76,
+      "aiderBenchmark": 86.3,
+      "costValueScore": 9,
+      "totalBenchmarks": 15
+    },
+    {
+      "id": "cmewubd7q009ilcdoqyk1kjm8",
+      "name": "codestral-22b",
+      "displayName": "Codestral 22B",
+      "provider": "Mistral",
+      "description": "Powerful coding model",
+      "contextWindow": 32000,
+      "pricingInput": 0.00018,
+      "pricingOutput": 0.00018,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "code_review",
+        "debugging",
+        "documentation"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.88,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd7i009hlcdo46mudgpu",
+      "name": "codestral-mamba",
+      "displayName": "Codestral Mamba",
+      "provider": "Mistral",
+      "description": "Specialized coding model with large context",
+      "contextWindow": 256000,
+      "pricingInput": 0.00018,
+      "pricingOutput": 0.00018,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "code_review",
+        "debugging",
+        "documentation"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.72,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd8r009mlcdove6ex0m3",
+      "name": "command-r",
+      "displayName": "Command R",
+      "provider": "Cohere",
+      "description": "Balanced command model from Cohere",
+      "contextWindow": 128000,
+      "pricingInput": 0.0005,
+      "pricingOutput": 0.0015,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": true,
+      "category": "chat",
+      "capabilities": [
+        "tool_use",
+        "function_calling",
+        "multi_step_reasoning"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.93,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd8h009llcdo1ufabpc1",
+      "name": "command-r-plus",
+      "displayName": "Command R+",
+      "provider": "Cohere",
+      "description": "Advanced command model from Cohere",
+      "contextWindow": 128000,
+      "pricingInput": 0.0015,
+      "pricingOutput": 0.0045,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": true,
+      "category": "chat",
+      "capabilities": [
+        "tool_use",
+        "function_calling",
+        "multi_step_reasoning"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.82,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewtbrxy0003lcik62iswfdh",
+      "name": "cursor-small",
+      "displayName": "Cursor Small (Free)",
+      "provider": "Cursor",
+      "description": "Fast and efficient free tier model",
+      "contextWindow": 32000,
+      "pricingInput": 0,
+      "pricingOutput": 0,
+      "isFree": true,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": true,
+      "category": "chat",
+      "capabilities": [
+        "tool_use",
+        "function_calling",
+        "multi_step_reasoning"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.82,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd89009klcdo1lq4egr4",
+      "name": "deepseek-chat-67b",
+      "displayName": "DeepSeek Chat 67B",
+      "provider": "DeepSeek",
+      "description": "Large conversational model from DeepSeek",
+      "contextWindow": 32768,
+      "pricingInput": 0.00014,
+      "pricingOutput": 0.00028,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": false,
+      "category": "chat",
+      "capabilities": [
+        "chat",
+        "analysis",
+        "writing",
+        "reasoning"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.84,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd80009jlcdo1zmo9p2y",
+      "name": "deepseek-coder-33b",
+      "displayName": "DeepSeek Coder 33B",
+      "provider": "DeepSeek",
+      "description": "Specialized coding model from DeepSeek",
+      "contextWindow": 32768,
+      "pricingInput": 0.00014,
+      "pricingOutput": 0.00028,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "code_review",
+        "debugging",
+        "documentation"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.85,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd4q0096lcdo8c7m0erq",
+      "name": "gpt-3.5-turbo",
+      "displayName": "GPT-3.5 Turbo",
+      "provider": "OpenAI",
+      "description": "Fast and affordable model",
+      "contextWindow": 16385,
+      "pricingInput": 0.0005,
+      "pricingOutput": 0.0015,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": false,
+      "category": "chat",
+      "capabilities": [
+        "chat",
+        "analysis",
+        "writing",
+        "basic_coding"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.82,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd4f0095lcdobbzfbmm9",
+      "name": "gpt-4",
+      "displayName": "GPT-4",
+      "provider": "OpenAI",
+      "description": "Original GPT-4 model",
+      "contextWindow": 8192,
+      "pricingInput": 0.03,
+      "pricingOutput": 0.06,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": true,
+      "category": "chat",
+      "capabilities": [
+        "tool_use",
+        "function_calling",
+        "multi_step_reasoning",
+        "code_generation",
+        "analysis"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.87,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd460094lcdotvna1bne",
+      "name": "gpt-4-turbo",
+      "displayName": "GPT-4 Turbo",
+      "provider": "OpenAI",
+      "description": "Advanced model with large context window",
+      "contextWindow": 128000,
+      "pricingInput": 0.01,
+      "pricingOutput": 0.03,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": true,
+      "category": "coding",
+      "capabilities": [
+        "tool_use",
+        "function_calling",
+        "multi_step_reasoning"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.83,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewtbrxg0001lcik3l8ox6c1",
+      "name": "gpt-4o",
+      "displayName": "GPT-4o",
+      "provider": "OpenAI",
+      "description": "Fast and capable model for general tasks",
+      "contextWindow": 128000,
+      "pricingInput": 0.005,
+      "pricingOutput": 0.015,
+      "isFree": false,
+      "isRecommended": true,
+      "isAvailableInCursor": false,
+      "isReasoning": false,
+      "isAgent": true,
+      "category": "chat",
+      "capabilities": [
+        "tool_use",
+        "function_calling",
+        "multi_step_reasoning",
+        "code_generation",
+        "analysis",
+        "vision"
+      ],
+      "avgRating": 4.2,
+      "avgResponseTime": 4500,
+      "totalRatings": 6,
+      "passRate": 0.7,
+      "aiderBenchmark": 82.9,
+      "costValueScore": 12.7,
+      "totalBenchmarks": 16
+    },
+    {
+      "id": "cmewubd3w0093lcdo5zqohcd0",
+      "name": "gpt-4o-mini",
+      "displayName": "GPT-4o Mini",
+      "provider": "OpenAI",
+      "description": "Affordable and intelligent small model",
+      "contextWindow": 128000,
+      "pricingInput": 0.00015,
+      "pricingOutput": 0.0006,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": true,
+      "category": "chat",
+      "capabilities": [
+        "tool_use",
+        "function_calling",
+        "multi_step_reasoning"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.8,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd5a0098lcdo22i9w021",
+      "name": "gemini-1.5-flash",
+      "displayName": "Gemini 1.5 Flash",
+      "provider": "Google",
+      "description": "Fast multimodal model from Google",
+      "contextWindow": 1048576,
+      "pricingInput": 0.000075,
+      "pricingOutput": 0.0003,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": true,
+      "category": "chat",
+      "capabilities": [
+        "tool_use",
+        "function_calling",
+        "multi_step_reasoning"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.81,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd500097lcdo4mddjx0m",
+      "name": "gemini-1.5-pro",
+      "displayName": "Gemini 1.5 Pro",
+      "provider": "Google",
+      "description": "Advanced multimodal model from Google",
+      "contextWindow": 2097152,
+      "pricingInput": 0.00025,
+      "pricingOutput": 0.0005,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": true,
+      "category": "coding",
+      "capabilities": [
+        "tool_use",
+        "function_calling",
+        "multi_step_reasoning"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.77,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd5k0099lcdo4undaa7i",
+      "name": "gemini-pro",
+      "displayName": "Gemini Pro",
+      "provider": "Google",
+      "description": "Google's advanced language model",
+      "contextWindow": 30720,
+      "pricingInput": 0.00025,
+      "pricingOutput": 0.0005,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": true,
+      "category": "chat",
+      "capabilities": [
+        "tool_use",
+        "function_calling",
+        "multi_step_reasoning"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.9,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd9t009qlcdowiaj3nzo",
+      "name": "grok-1",
+      "displayName": "Grok 1",
+      "provider": "xAI",
+      "description": "Original Grok model",
+      "contextWindow": 128000,
+      "pricingInput": 0.0008,
+      "pricingOutput": 0.004,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": false,
+      "category": "chat",
+      "capabilities": [
+        "chat",
+        "analysis",
+        "reasoning",
+        "humor"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.9,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd9l009plcdo7ndfwpfk",
+      "name": "grok-2",
+      "displayName": "Grok 2",
+      "provider": "xAI",
+      "description": "xAI's advanced reasoning model",
+      "contextWindow": 128000,
+      "pricingInput": 0.002,
+      "pricingOutput": 0.01,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": true,
+      "category": "chat",
+      "capabilities": [
+        "tool_use",
+        "function_calling",
+        "multi_step_reasoning"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.76,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd91009nlcdooita2fc6",
+      "name": "fireworks-llama-3.1-70b",
+      "displayName": "Llama 3.1 70B (Fireworks)",
+      "provider": "Fireworks",
+      "description": "Optimized Llama model on Fireworks",
+      "contextWindow": 131072,
+      "pricingInput": 0.0009,
+      "pricingOutput": 0.0009,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "analysis",
+        "reasoning",
+        "documentation"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.73,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd70009flcdo0hwkzk4j",
+      "name": "llama-3.2-11b",
+      "displayName": "Llama 3.2 11B",
+      "provider": "Meta",
+      "description": "Efficient Llama model for general tasks",
+      "contextWindow": 128000,
+      "pricingInput": 0.00015,
+      "pricingOutput": 0.00015,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": false,
+      "category": "chat",
+      "capabilities": [
+        "chat",
+        "analysis",
+        "writing",
+        "basic_coding"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.79,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd7a009glcdohd3em3e9",
+      "name": "llama-3.2-3b",
+      "displayName": "Llama 3.2 3B",
+      "provider": "Meta",
+      "description": "Lightweight Llama model",
+      "contextWindow": 128000,
+      "pricingInput": 0.00006,
+      "pricingOutput": 0.00006,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": false,
+      "category": "chat",
+      "capabilities": [
+        "chat",
+        "analysis",
+        "basic_coding"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.92,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd6r009elcdo4v1d7x6d",
+      "name": "llama-3.2-70b",
+      "displayName": "Llama 3.2 70B",
+      "provider": "Meta",
+      "description": "Advanced Llama model",
+      "contextWindow": 128000,
+      "pricingInput": 0.00054,
+      "pricingOutput": 0.00054,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "analysis",
+        "reasoning",
+        "documentation"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 1,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd6i009dlcdosyf1zq3u",
+      "name": "llama-3.2-90b",
+      "displayName": "Llama 3.2 90B",
+      "provider": "Meta",
+      "description": "Large Llama model for complex tasks",
+      "contextWindow": 128000,
+      "pricingInput": 0.00072,
+      "pricingOutput": 0.00072,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "analysis",
+        "reasoning",
+        "documentation"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.88,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd5t009alcdo183zvdv1",
+      "name": "mistral-large",
+      "displayName": "Mistral Large",
+      "provider": "Mistral",
+      "description": "Most capable Mistral model",
+      "contextWindow": 128000,
+      "pricingInput": 0.002,
+      "pricingOutput": 0.006,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": true,
+      "category": "coding",
+      "capabilities": [
+        "tool_use",
+        "function_calling",
+        "multi_step_reasoning"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.77,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd61009blcdovrzdli5u",
+      "name": "mistral-medium",
+      "displayName": "Mistral Medium",
+      "provider": "Mistral",
+      "description": "Balanced Mistral model",
+      "contextWindow": 32000,
+      "pricingInput": 0.00081,
+      "pricingOutput": 0.00243,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": false,
+      "category": "chat",
+      "capabilities": [
+        "chat",
+        "analysis",
+        "writing",
+        "coding"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.94,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd69009clcdoj3blopmz",
+      "name": "mistral-small",
+      "displayName": "Mistral Small",
+      "provider": "Mistral",
+      "description": "Fast and efficient Mistral model",
+      "contextWindow": 32000,
+      "pricingInput": 0.00027,
+      "pricingOutput": 0.00081,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": false,
+      "category": "chat",
+      "capabilities": [
+        "chat",
+        "analysis",
+        "writing",
+        "basic_coding"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.78,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewubd9b009olcdowc7h4t70",
+      "name": "together-mixtral-8x7b",
+      "displayName": "Mixtral 8x7B (Together)",
+      "provider": "Together",
+      "description": "Powerful mixture of experts model",
+      "contextWindow": 32768,
+      "pricingInput": 0.0006,
+      "pricingOutput": 0.0006,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": false,
+      "category": "chat",
+      "capabilities": [
+        "chat",
+        "analysis",
+        "writing",
+        "reasoning"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.82,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewvelyj000nlcp4x79mfy97",
+      "name": "claude-3.7-sonnet",
+      "displayName": "claude-3.7-sonnet",
+      "provider": "Anthropic",
+      "description": "Модель для программирования от Anthropic",
+      "contextWindow": 200000,
+      "pricingInput": 0.003,
+      "pricingOutput": 0.015,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": true,
+      "category": "coding",
+      "capabilities": [
+        "tool_use",
+        "function_calling",
+        "multi_step_reasoning",
+        "code_generation",
+        "analysis",
+        "self_reflection"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.96,
+      "aiderBenchmark": 78.2,
+      "costValueScore": null,
+      "totalBenchmarks": 13
+    },
+    {
+      "id": "cmewvelxb000ilcp4b21jdma5",
+      "name": "claude-4-opus",
+      "displayName": "claude-4-opus",
+      "provider": "Anthropic",
+      "description": "Модель для программирования от Anthropic (с reasoning)",
+      "contextWindow": 200000,
+      "pricingInput": 0.015,
+      "pricingOutput": 0.075,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": true,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "analysis",
+        "problem_solving"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.91,
+      "aiderBenchmark": 85.1,
+      "costValueScore": null,
+      "totalBenchmarks": 13
+    },
+    {
+      "id": "cmewvelsh0000lcp4a943r8qh",
+      "name": "claude-4-sonnet",
+      "displayName": "claude-4-sonnet",
+      "provider": "Anthropic",
+      "description": "Модель для программирования от Anthropic",
+      "contextWindow": 200000,
+      "pricingInput": 0.003,
+      "pricingOutput": 0.015,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "analysis",
+        "problem_solving"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.94,
+      "aiderBenchmark": 82.7,
+      "costValueScore": null,
+      "totalBenchmarks": 13
+    },
+    {
+      "id": "cmewvelsv0001lcp4xxkkf8y6",
+      "name": "claude-4-sonnet-1m",
+      "displayName": "claude-4-sonnet-1m",
+      "provider": "Anthropic",
+      "description": "Модель для программирования от Anthropic",
+      "contextWindow": 1000000,
+      "pricingInput": 0.003,
+      "pricingOutput": 0.015,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "analysis",
+        "problem_solving"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.8,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewvelx1000hlcp4s2jxns3v",
+      "name": "claude-4.1-opus",
+      "displayName": "claude-4.1-opus",
+      "provider": "Anthropic",
+      "description": "Модель для программирования от Anthropic (с reasoning)",
+      "contextWindow": 200000,
+      "pricingInput": 0.015,
+      "pricingOutput": 0.075,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": true,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "analysis",
+        "problem_solving"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.91,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewvelvs000clcp4ls80hqbs",
+      "name": "deepseek-r1-0528",
+      "displayName": "deepseek-r1-0528",
+      "provider": "DeepSeek",
+      "description": "Модель для программирования от DeepSeek (бесплатная)",
+      "contextWindow": 32768,
+      "pricingInput": 0.00014,
+      "pricingOutput": 0.00028,
+      "isFree": true,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "analysis",
+        "problem_solving"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.73,
+      "aiderBenchmark": 68.9,
+      "costValueScore": null,
+      "totalBenchmarks": 13
+    },
+    {
+      "id": "cmewvelw0000dlcp4hcii0i4n",
+      "name": "deepseek-v3.1",
+      "displayName": "deepseek-v3.1",
+      "provider": "DeepSeek",
+      "description": "Модель для программирования от DeepSeek (бесплатная) (с reasoning)",
+      "contextWindow": 32768,
+      "pricingInput": 0.00014,
+      "pricingOutput": 0.00028,
+      "isFree": true,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": true,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "analysis",
+        "problem_solving"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.88,
+      "aiderBenchmark": 72,
+      "costValueScore": null,
+      "totalBenchmarks": 13
+    },
+    {
+      "id": "cmewvely1000llcp4j7w2x7hm",
+      "name": "gemini-2.5-flash",
+      "displayName": "gemini-2.5-flash",
+      "provider": "Google",
+      "description": "Модель для программирования от Google (с reasoning)",
+      "contextWindow": 1048576,
+      "pricingInput": 0.000075,
+      "pricingOutput": 0.0003,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": true,
+      "isAgent": true,
+      "category": "coding",
+      "capabilities": [
+        "tool_use",
+        "function_calling",
+        "multi_step_reasoning"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.75,
+      "aiderBenchmark": 76.4,
+      "costValueScore": null,
+      "totalBenchmarks": 13
+    },
+    {
+      "id": "cmewvelv00009lcp4iyjen994",
+      "name": "gemini-2.5-pro",
+      "displayName": "gemini-2.5-pro",
+      "provider": "Google",
+      "description": "Модель для программирования от Google (с reasoning)",
+      "contextWindow": 2097152,
+      "pricingInput": 0.00025,
+      "pricingOutput": 0.0005,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": true,
+      "isAgent": true,
+      "category": "coding",
+      "capabilities": [
+        "tool_use",
+        "function_calling",
+        "multi_step_reasoning",
+        "code_generation",
+        "analysis",
+        "vision"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.95,
+      "aiderBenchmark": 83.1,
+      "costValueScore": null,
+      "totalBenchmarks": 13
+    },
+    {
+      "id": "cmewvelyb000mlcp47tik9ptm",
+      "name": "gpt-4.1",
+      "displayName": "gpt-4.1",
+      "provider": "OpenAI",
+      "description": "Модель для программирования от OpenAI",
+      "contextWindow": 128000,
+      "pricingInput": 0.01,
+      "pricingOutput": 0.03,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "analysis",
+        "problem_solving"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.83,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewvelt70002lcp4k5l3oi2w",
+      "name": "gpt-5",
+      "displayName": "gpt-5",
+      "provider": "OpenAI",
+      "description": "Модель для программирования от OpenAI",
+      "contextWindow": 128000,
+      "pricingInput": 0.005,
+      "pricingOutput": 0.015,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "analysis",
+        "problem_solving"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.75,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewvelth0003lcp41trzr4yu",
+      "name": "gpt-5-fast",
+      "displayName": "gpt-5-fast",
+      "provider": "OpenAI",
+      "description": "Модель для программирования от OpenAI (с reasoning)",
+      "contextWindow": 128000,
+      "pricingInput": 0.0025,
+      "pricingOutput": 0.01,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": true,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "analysis",
+        "problem_solving"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.98,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewvelts0004lcp4pguo4zkr",
+      "name": "gpt-5-high",
+      "displayName": "gpt-5-high",
+      "provider": "OpenAI",
+      "description": "Модель для программирования от OpenAI (с reasoning)",
+      "contextWindow": 128000,
+      "pricingInput": 0.01,
+      "pricingOutput": 0.03,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": true,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "analysis",
+        "problem_solving"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.85,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewvelu10005lcp42wntv22h",
+      "name": "gpt-5-high-fast",
+      "displayName": "gpt-5-high-fast",
+      "provider": "OpenAI",
+      "description": "Модель для программирования от OpenAI (с reasoning)",
+      "contextWindow": 128000,
+      "pricingInput": 0.005,
+      "pricingOutput": 0.015,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": true,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "analysis",
+        "problem_solving"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.74,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewvelu90006lcp418tfy8yv",
+      "name": "gpt-5-low",
+      "displayName": "gpt-5-low",
+      "provider": "OpenAI",
+      "description": "Модель для программирования от OpenAI (с reasoning)",
+      "contextWindow": 128000,
+      "pricingInput": 0.001,
+      "pricingOutput": 0.002,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": true,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "analysis",
+        "problem_solving"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.99,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewveluj0007lcp4m7jvm55d",
+      "name": "gpt-5-low-fast",
+      "displayName": "gpt-5-low-fast",
+      "provider": "OpenAI",
+      "description": "Модель для программирования от OpenAI (с reasoning)",
+      "contextWindow": 128000,
+      "pricingInput": 0.0005,
+      "pricingOutput": 0.001,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": true,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "analysis",
+        "problem_solving"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.96,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewvelxl000jlcp4rie3jm1e",
+      "name": "gpt-5-medium",
+      "displayName": "gpt-5-medium",
+      "provider": "OpenAI",
+      "description": "Модель для программирования от OpenAI (с reasoning)",
+      "contextWindow": 128000,
+      "pricingInput": 0.002,
+      "pricingOutput": 0.01,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": true,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "analysis",
+        "problem_solving"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.78,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewvelxt000klcp4btu8wzy1",
+      "name": "gpt-5-medium-fast",
+      "displayName": "gpt-5-medium-fast",
+      "provider": "OpenAI",
+      "description": "Модель для программирования от OpenAI (с reasoning)",
+      "contextWindow": 128000,
+      "pricingInput": 0.001,
+      "pricingOutput": 0.002,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": true,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "analysis",
+        "problem_solving"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.99,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewvelv9000alcp4mneqalte",
+      "name": "gpt-5-mini",
+      "displayName": "gpt-5-mini",
+      "provider": "OpenAI",
+      "description": "Модель для программирования от OpenAI (с reasoning)",
+      "contextWindow": 128000,
+      "pricingInput": 0.00015,
+      "pricingOutput": 0.0006,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": true,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "analysis",
+        "problem_solving"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.81,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewvelvi000blcp4jnzw0g2i",
+      "name": "gpt-5-nano",
+      "displayName": "gpt-5-nano",
+      "provider": "OpenAI",
+      "description": "Модель для программирования от OpenAI (с reasoning)",
+      "contextWindow": 128000,
+      "pricingInput": 0.000075,
+      "pricingOutput": 0.0003,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": true,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "analysis",
+        "problem_solving"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.84,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewvelz0000plcp4zct8hd8r",
+      "name": "grok-3",
+      "displayName": "grok-3",
+      "provider": "xAI",
+      "description": "Модель для программирования от xAI (с reasoning)",
+      "contextWindow": 128000,
+      "pricingInput": 0.002,
+      "pricingOutput": 0.01,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": true,
+      "isAgent": true,
+      "category": "coding",
+      "capabilities": [
+        "tool_use",
+        "function_calling",
+        "multi_step_reasoning"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.98,
+      "aiderBenchmark": 69.8,
+      "costValueScore": null,
+      "totalBenchmarks": 13
+    },
+    {
+      "id": "cmewvelz9000qlcp4wwrn0c2k",
+      "name": "grok-3-mini",
+      "displayName": "grok-3-mini",
+      "provider": "xAI",
+      "description": "Модель для программирования от xAI",
+      "contextWindow": 128000,
+      "pricingInput": 0.0008,
+      "pricingOutput": 0.004,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "analysis",
+        "problem_solving"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.75,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewvelw8000elcp45fgsmnl4",
+      "name": "grok-4",
+      "displayName": "grok-4",
+      "provider": "xAI",
+      "description": "Модель для программирования от xAI",
+      "contextWindow": 128000,
+      "pricingInput": 0.002,
+      "pricingOutput": 0.01,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": true,
+      "category": "coding",
+      "capabilities": [
+        "tool_use",
+        "function_calling",
+        "multi_step_reasoning",
+        "code_generation",
+        "analysis",
+        "real_time_knowledge"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.99,
+      "aiderBenchmark": 71.3,
+      "costValueScore": null,
+      "totalBenchmarks": 13
+    },
+    {
+      "id": "cmewvelws000glcp4gzyfm9ad",
+      "name": "grok-code-fast-1",
+      "displayName": "grok-code-fast-1",
+      "provider": "xAI",
+      "description": "Модель для программирования от xAI",
+      "contextWindow": 128000,
+      "pricingInput": 0.002,
+      "pricingOutput": 0.01,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "analysis",
+        "problem_solving"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.74,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    },
+    {
+      "id": "cmewvelwh000flcp4j5c6qgo3",
+      "name": "kimi-k2-instruct",
+      "displayName": "kimi-k2-instruct",
+      "provider": "Kimi",
+      "description": "Модель для программирования от Kimi (с reasoning)",
+      "contextWindow": 128000,
+      "pricingInput": 0.0005,
+      "pricingOutput": 0.001,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": true,
+      "isAgent": false,
+      "category": "coding",
+      "capabilities": [
+        "code_generation",
+        "analysis",
+        "problem_solving"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.88,
+      "aiderBenchmark": 65.2,
+      "costValueScore": null,
+      "totalBenchmarks": 13
+    },
+    {
+      "id": "cmewvelus0008lcp44nxgn8i4",
+      "name": "o3",
+      "displayName": "o3",
+      "provider": "OpenAI",
+      "description": "Универсальная модель ИИ от OpenAI (с reasoning)",
+      "contextWindow": 200000,
+      "pricingInput": 0.01,
+      "pricingOutput": 0.03,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": true,
+      "isAgent": true,
+      "category": "reasoning",
+      "capabilities": [
+        "advanced_reasoning",
+        "multi_step_planning",
+        "code_generation",
+        "analysis",
+        "self_reflection"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.8,
+      "aiderBenchmark": 81.3,
+      "costValueScore": null,
+      "totalBenchmarks": 13
+    },
+    {
+      "id": "cmewvelzi000rlcp401eaqc40",
+      "name": "o3-pro",
+      "displayName": "o3-pro",
+      "provider": "OpenAI",
+      "description": "Универсальная модель ИИ от OpenAI",
+      "contextWindow": 200000,
+      "pricingInput": 0.03,
+      "pricingOutput": 0.06,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": true,
+      "category": "reasoning",
+      "capabilities": [
+        "tool_use",
+        "function_calling",
+        "multi_step_reasoning"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.88,
+      "aiderBenchmark": 84.9,
+      "costValueScore": null,
+      "totalBenchmarks": 13
+    },
+    {
+      "id": "cmewvelys000olcp4ujww7znw",
+      "name": "o4-mini",
+      "displayName": "o4-mini",
+      "provider": "OpenAI",
+      "description": "Универсальная модель ИИ от OpenAI",
+      "contextWindow": 128000,
+      "pricingInput": 0.00015,
+      "pricingOutput": 0.0006,
+      "isFree": false,
+      "isRecommended": false,
+      "isAvailableInCursor": true,
+      "isReasoning": false,
+      "isAgent": false,
+      "category": "reasoning",
+      "capabilities": [
+        "text_generation",
+        "analysis",
+        "problem_solving"
+      ],
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.94,
+      "aiderBenchmark": null,
+      "costValueScore": null,
+      "totalBenchmarks": 12
+    }
+  ],
+  "providers": [
+    "Anthropic",
+    "Cohere",
+    "Cursor",
+    "DeepSeek",
+    "Fireworks",
+    "Google",
+    "Kimi",
+    "Meta",
+    "Mistral",
+    "OpenAI",
+    "Together",
+    "xAI"
+  ],
+  "categories": [
+    "chat",
+    "coding",
+    "reasoning"
+  ],
+  "stats": {
+    "total": 59,
+    "withCursor": 58,
+    "withReasoning": 17,
+    "withAgent": 23,
+    "free": 3,
+    "premium": 56
+  },
+  "exportedAt": "2025-08-29T15:22:14.311Z"
+}
+    </script>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            sunIcon.classList.toggle('hidden');
+            moonIcon.classList.toggle('hidden');
+        });
+
+        // Utility functions
+        function formatNumber(num) {
+            return num.toLocaleString();
+        }
+
+        function formatTime(ms) {
+            if (!ms) return 'N/A';
+            if (ms < 1000) {
+                return `${Math.round(ms)}ms`;
+            }
+            return `${(ms / 1000).toFixed(1)}s`;
+        }
+
+        function getTimeColor(ms) {
+            if (!ms) return 'text-gray-500 dark:text-gray-400';
+            if (ms < 1000) return 'text-green-600 dark:text-green-400';
+            if (ms < 3000) return 'text-yellow-600 dark:text-yellow-400';
+            return 'text-red-600 dark:text-red-400';
+        }
+
+        function getCostValueIcon(score) {
+            if (!score) return '❓';
+            if (score > 15) return '🚀';
+            if (score >= 5) return '✅';
+            return '⚠️';
+        }
+
+        function getCostValueColor(score) {
+            if (!score) return 'text-gray-500 dark:text-gray-400';
+            if (score > 15) return 'text-green-600 dark:text-green-400';
+            if (score >= 5) return 'text-blue-600 dark:text-blue-400';
+            return 'text-orange-600 dark:text-orange-400';
+        }
+
+        function getQualityColor(passRate) {
+            if (!passRate) return 'text-gray-500 dark:text-gray-400';
+            if (passRate >= 0.8) return 'text-green-600 dark:text-green-400';
+            if (passRate >= 0.6) return 'text-blue-600 dark:text-blue-400';
+            if (passRate >= 0.4) return 'text-yellow-600 dark:text-yellow-400';
+            return 'text-red-600 dark:text-red-400';
+        }
+
+        function createModelRow(model) {
+            const row = document.createElement('tr');
+            row.className = 'table-row';
+
+            // Model name with icons
+            const modelCell = document.createElement('td');
+            modelCell.className = 'table-cell';
+
+            const modelDiv = document.createElement('div');
+            modelDiv.className = 'flex gap-2';
+
+            // Capability icons
+            if (model.isAvailableInCursor) {
+                const cursorIcon = document.createElement('div');
+                cursorIcon.className = 'icon icon-blue';
+                cursorIcon.textContent = '💻';
+                cursorIcon.title = 'Available in Cursor IDE';
+                modelDiv.appendChild(cursorIcon);
+            }
+
+            if (model.isReasoning) {
+                const reasoningIcon = document.createElement('div');
+                reasoningIcon.className = 'icon icon-purple';
+                reasoningIcon.textContent = '🧠';
+                reasoningIcon.title = 'Has reasoning capabilities';
+                modelDiv.appendChild(reasoningIcon);
+            }
+
+            if (model.isAgent) {
+                const agentIcon = document.createElement('div');
+                agentIcon.className = 'icon icon-green';
+                agentIcon.textContent = '🤖';
+                agentIcon.title = 'Has agent capabilities';
+                modelDiv.appendChild(agentIcon);
+            }
+
+            // Model name and provider
+            const nameDiv = document.createElement('div');
+            const modelName = document.createElement('div');
+            modelName.className = 'model-name';
+            modelName.textContent = model.displayName;
+            nameDiv.appendChild(modelName);
+
+            const modelProvider = document.createElement('div');
+            modelProvider.className = 'model-provider';
+            modelProvider.textContent = model.provider;
+            nameDiv.appendChild(modelProvider);
+
+            modelDiv.appendChild(nameDiv);
+            modelCell.appendChild(modelDiv);
+
+            // Cost/Value
+            const costValueCell = document.createElement('td');
+            costValueCell.className = 'table-cell';
+            if (model.costValueScore) {
+                const costValueDiv = document.createElement('div');
+                costValueDiv.className = 'flex items-center justify-center gap-1';
+                costValueDiv.innerHTML = `
+                    <span class="font-medium ${getCostValueColor(model.costValueScore)}">${model.costValueScore}</span>
+                    <span class="text-xs">${getCostValueIcon(model.costValueScore)}</span>
+                `;
+                costValueCell.appendChild(costValueDiv);
+            } else {
+                costValueCell.innerHTML = '<span class="text-gray-500 dark:text-gray-400 text-xs">N/A</span>';
+            }
+
+            // Speed
+            const speedCell = document.createElement('td');
+            speedCell.className = 'table-cell';
+            if (model.avgResponseTime) {
+                const speedDiv = document.createElement('div');
+                speedDiv.className = 'flex justify-center gap-1';
+                speedDiv.innerHTML = `
+                    <span style="font-size: 0.75rem; color: #9ca3af;">⏱️</span>
+                    <span class="font-medium ${getTimeColor(model.avgResponseTime)}">${formatTime(model.avgResponseTime)}</span>
+                `;
+                speedCell.appendChild(speedDiv);
+            } else {
+                speedCell.innerHTML = '<span class="text-gray">N/A</span>';
+            }
+
+            // Quality
+            const qualityCell = document.createElement('td');
+            qualityCell.className = 'table-cell';
+            if (model.passRate) {
+                const qualityDiv = document.createElement('div');
+                qualityDiv.className = 'flex-col items-center gap-1';
+
+                // Pass rate
+                const passRateDiv = document.createElement('div');
+                passRateDiv.className = 'flex gap-1';
+                passRateDiv.innerHTML = `
+                    <span style="font-size: 0.75rem; margin-right: 0.25rem; color: #16a34a;">⚡</span>
+                    <span class="font-medium ${getQualityColor(model.passRate)}">${Math.round(model.passRate * 100)}%</span>
+                `;
+                qualityDiv.appendChild(passRateDiv);
+
+                // User ratings if available
+                if (model.avgRating) {
+                    const ratingDiv = document.createElement('div');
+                    ratingDiv.className = 'flex gap-1';
+                    ratingDiv.innerHTML = `
+                        <span style="font-size: 0.75rem; margin-right: 0.25rem; color: #eab308;">⭐</span>
+                        <span class="font-medium">${model.avgRating}</span>
+                        <span class="text-gray text-xs">(${model.totalRatings})</span>
+                    `;
+                    qualityDiv.appendChild(ratingDiv);
+                }
+
+                qualityCell.appendChild(qualityDiv);
+            } else {
+                qualityCell.innerHTML = '<span class="text-gray">N/A</span>';
+            }
+
+            // Pricing
+            const pricingCell = document.createElement('td');
+            pricingCell.className = 'table-cell';
+            if (model.pricingInput) {
+                const pricingDiv = document.createElement('div');
+                pricingDiv.className = 'flex justify-center gap-1';
+                pricingDiv.innerHTML = `
+                    <span style="font-size: 0.75rem; color: #9ca3af;">💰</span>
+                    <span class="font-medium">$${(model.pricingInput * 1000).toFixed(4)}</span>
+                    <span class="text-gray text-xs">/1K</span>
+                `;
+                pricingCell.appendChild(pricingDiv);
+            } else {
+                pricingCell.innerHTML = '<span class="text-gray">N/A</span>';
+            }
+
+            // Context Window
+            const contextCell = document.createElement('td');
+            contextCell.className = 'table-cell';
+            if (model.contextWindow) {
+                contextCell.innerHTML = `<span class="font-medium text-gray-900 dark:text-gray-100">${formatNumber(model.contextWindow)} K</span>`;
+            } else {
+                contextCell.innerHTML = '<span class="text-gray-500 dark:text-gray-400 text-xs">N/A</span>';
+            }
+
+            // Aider Benchmark
+            const aiderCell = document.createElement('td');
+            aiderCell.className = 'table-cell';
+            if (model.aiderBenchmark) {
+                const aiderDiv = document.createElement('div');
+                aiderDiv.className = 'flex-col items-center';
+                aiderDiv.innerHTML = `
+                    <span class="font-medium">${model.aiderBenchmark}%</span>
+                    <span class="text-gray text-xs">Aider</span>
+                `;
+                aiderCell.appendChild(aiderDiv);
+            } else {
+                aiderCell.innerHTML = '<span class="text-gray">N/A</span>';
+            }
+
+            row.appendChild(modelCell);
+            row.appendChild(costValueCell);
+            row.appendChild(speedCell);
+            row.appendChild(qualityCell);
+            row.appendChild(pricingCell);
+            row.appendChild(contextCell);
+            row.appendChild(aiderCell);
+
+            return row;
+        }
+
+        // Main application logic
+        let currentModels = [];
+        let currentSort = { column: null, direction: 'asc' };
+
+        // Function to load data from embedded script or JSON file
+        async function loadDataFromJSON() {
+            try {
+                console.log('📥 Loading data...');
+
+                // First, try to load from embedded script tag
+                const embeddedScript = document.getElementById('models-data');
+                if (embeddedScript && embeddedScript.textContent.trim()) {
+                    console.log('📄 Loading data from embedded script...');
+                    staticData = JSON.parse(embeddedScript.textContent.trim());
+                    console.log('✅ Data loaded from embedded script:', staticData.stats.total, 'models');
+                    return true;
+                }
+
+                // If embedded data not found, try to load from external JSON file
+                console.log('🌐 Loading data from external JSON file...');
+                const response = await fetch('./static-models-data.json');
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                staticData = await response.json();
+                console.log('✅ Data loaded from external file:', staticData.stats.total, 'models');
+
+                return true;
+            } catch (error) {
+                console.error('❌ Error loading data:', error);
+                return false;
+            }
+        }
+
+        // Function to show loading state
+        function showLoadingState() {
+            document.getElementById('models-tbody').innerHTML = `
+                <tr>
+                    <td colspan="7" class="table-cell text-center py-8">
+                        <div class="text-gray-500 dark:text-gray-400">
+                            <div class="animate-pulse">
+                                <div class="h-4 bg-gray-300 dark:bg-gray-600 rounded w-48 mx-auto mb-4"></div>
+                                <div class="h-4 bg-gray-300 dark:bg-gray-600 rounded w-32 mx-auto"></div>
+                            </div>
+                            <p class="text-sm mt-4">Loading data...</p>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }
+
+        // Function to show error state
+        function showErrorState() {
+            document.getElementById('models-tbody').innerHTML = `
+                <tr>
+                    <td colspan="7" class="table-cell text-center py-8">
+                        <div class="text-red-500 dark:text-red-400">
+                            <div class="text-6xl mb-4">❌</div>
+                            <p class="text-lg font-medium">Failed to load data</p>
+                            <p class="text-sm mt-2">Please make sure 'static-models-data.json' file is in the same directory</p>
+                            <p class="text-xs mt-4 text-gray-500">
+                                Expected file: <code>./static-models-data.json</code>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }
+
+        async function initializeApp() {
+            // Show loading state
+            showLoadingState();
+
+            // Load data from JSON file
+            const dataLoaded = await loadDataFromJSON();
+
+            if (dataLoaded && staticData) {
+                currentModels = [...staticData.models];
+
+                // Update stats
+                document.getElementById('total-models').textContent = staticData.stats.total;
+                document.getElementById('cursor-models').textContent = staticData.stats.withCursor;
+
+                // Set generated date
+                const generatedDate = new Date(staticData.exportedAt);
+                document.getElementById('generated-date').textContent = generatedDate.toLocaleDateString();
+
+                // Populate provider filter
+                const providerFilter = document.getElementById('provider-filter');
+                staticData.providers.forEach(provider => {
+                    const option = document.createElement('option');
+                    option.value = provider;
+                    option.textContent = provider;
+                    providerFilter.appendChild(option);
+                });
+
+                renderTable();
+                setupEventListeners();
+
+                console.log('🚀 Application initialized successfully!');
+            } else {
+                showErrorState();
+            }
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('models-tbody');
+            tbody.innerHTML = '';
+
+            if (currentModels.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="table-cell text-center py-8">
+                            <div class="text-gray-500 dark:text-gray-400">
+                                <i data-lucide="search" class="h-12 w-12 mx-auto mb-4"></i>
+                                <p class="text-lg font-medium">No models found</p>
+                                <p class="text-sm">Try adjusting your search or filters</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            currentModels.forEach(model => {
+                const row = createModelRow(model);
+                tbody.appendChild(row);
+            });
+
+            // Icons are now simple Unicode symbols, no need to recreate
+        }
+
+        function setupEventListeners() {
+            // Search functionality
+            const searchInput = document.getElementById('search-input');
+            searchInput.addEventListener('input', (e) => {
+                filterModels();
+            });
+
+            // Provider filter
+            const providerFilter = document.getElementById('provider-filter');
+            providerFilter.addEventListener('change', filterModels);
+
+            // Capability filter
+            const capabilityFilter = document.getElementById('capability-filter');
+            capabilityFilter.addEventListener('change', filterModels);
+
+            // Sort buttons
+            document.getElementById('sort-cost-value').addEventListener('click', () => sortByColumn('costValueScore'));
+            document.getElementById('sort-speed').addEventListener('click', () => sortByColumn('avgResponseTime'));
+            document.getElementById('sort-quality').addEventListener('click', () => sortByColumn('passRate'));
+            document.getElementById('sort-pricing').addEventListener('click', () => sortByColumn('pricingInput'));
+            document.getElementById('sort-context').addEventListener('click', () => sortByColumn('contextWindow'));
+            document.getElementById('sort-aider').addEventListener('click', () => sortByColumn('aiderBenchmark'));
+        }
+
+        function filterModels() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const providerFilter = document.getElementById('provider-filter').value;
+            const capabilityFilter = document.getElementById('capability-filter').value;
+
+            currentModels = staticData.models.filter(model => {
+                // Search filter
+                const matchesSearch = !searchTerm ||
+                    model.displayName.toLowerCase().includes(searchTerm) ||
+                    model.provider.toLowerCase().includes(searchTerm) ||
+                    model.name.toLowerCase().includes(searchTerm);
+
+                // Provider filter
+                const matchesProvider = !providerFilter || model.provider === providerFilter;
+
+                // Capability filter
+                let matchesCapability = true;
+                switch (capabilityFilter) {
+                    case 'cursor':
+                        matchesCapability = model.isAvailableInCursor;
+                        break;
+                    case 'reasoning':
+                        matchesCapability = model.isReasoning;
+                        break;
+                    case 'agent':
+                        matchesCapability = model.isAgent;
+                        break;
+                    case 'free':
+                        matchesCapability = model.isFree;
+                        break;
+                }
+
+                return matchesSearch && matchesProvider && matchesCapability;
+            });
+
+            renderTable();
+        }
+
+        function sortByColumn(columnKey) {
+            if (currentSort.column === columnKey) {
+                currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+            } else {
+                currentSort.column = columnKey;
+                currentSort.direction = 'desc'; // Default to descending for most metrics
+            }
+
+            currentModels.sort((a, b) => {
+                let aVal = a[columnKey];
+                let bVal = b[columnKey];
+
+                // Handle null/undefined values
+                if (aVal == null && bVal == null) return 0;
+                if (aVal == null) return 1;
+                if (bVal == null) return -1;
+
+                // Special handling for certain columns
+                if (columnKey === 'avgResponseTime' || columnKey === 'pricingInput') {
+                    // For these, ascending means better (faster/cheaper)
+                    return currentSort.direction === 'asc' ? aVal - bVal : bVal - aVal;
+                } else {
+                    // For others, descending usually means better
+                    return currentSort.direction === 'asc' ? bVal - aVal : aVal - bVal;
+                }
+            });
+
+            // Update sort button icons
+            updateSortButtons();
+            renderTable();
+        }
+
+        function updateSortButtons() {
+            // Reset all sort buttons
+            document.querySelectorAll('[id^="sort-"]').forEach(btn => {
+                const icon = btn.querySelector('.sort-icon');
+                if (icon) {
+                    icon.textContent = '⇅';
+                }
+            });
+
+            // Update current sort button
+            if (currentSort.column) {
+                const buttonId = `sort-${currentSort.column.replace(/([A-Z])/g, '-$1').toLowerCase()}`;
+                const button = document.getElementById(buttonId);
+                if (button) {
+                    const icon = button.querySelector('.sort-icon');
+                    if (icon) {
+                        icon.textContent = currentSort.direction === 'asc' ? '↑' : '↓';
+                    }
+                }
+            }
+        }
+
+        // Initialize the application when the page loads
+        document.addEventListener('DOMContentLoaded', initializeApp);
+    </script>
+</body>
+</html>

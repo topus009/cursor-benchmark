@@ -19,7 +19,9 @@
     "analyze:missing": "node scripts/analyze-missing-data.js",
     "fill:known-data": "node scripts/fill-known-data.js",
     "update:aider": "node scripts/update-aider-benchmarks.js",
-    "update:agents": "node scripts/update-agent-capabilities.js"
+    "update:agents": "node scripts/update-agent-capabilities.js",
+    "export:static": "node scripts/export-static-data.js",
+    "update:html": "node scripts/update-html-data.js"
   },
   "dependencies": {
     "@prisma/client": "^6.15.0",
