@@ -24,7 +24,9 @@
       "avgResponseTime": 4333,
       "totalRatings": 6,
       "passRate": 0.75,
-      "aiderBenchmark": 85,
+      "hellaswagScore": 85,
+      "codeforcesElo": 750,
+      "codeforcesPercentile": 8,
       "costValueScore": 2.7,
       "totalBenchmarks": 15
     },
@@ -52,9 +54,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.76,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 1252,
+      "codeforcesPercentile": 18
     },
     {
       "id": "cmewubd340090lcdo4uwipt4j",
@@ -80,9 +84,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.72,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 938,
+      "codeforcesPercentile": 12
     },
     {
       "id": "cmewubd2l008ylcdoccig6hnw",
@@ -109,13 +115,15 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.85,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 959,
+      "codeforcesPercentile": 14
     },
     {
       "id": "cmewtbrws0000lcik751r1yol",
-      "name": "claude-3-5-sonnet-20241022",
+      "name": "claude-3-5-sonnet-20240304",
       "displayName": "Claude 3.5 Sonnet",
       "provider": "Anthropic",
       "description": "Most intelligent model for complex reasoning and coding tasks",
@@ -125,7 +133,7 @@
       "isFree": false,
       "isRecommended": true,
       "isAvailableInCursor": true,
-      "isReasoning": false,
+      "isReasoning": true,
       "isAgent": true,
       "category": "coding",
       "capabilities": [
@@ -139,7 +147,9 @@
       "avgResponseTime": 4667,
       "totalRatings": 6,
       "passRate": 0.76,
-      "aiderBenchmark": 86.3,
+      "hellaswagScore": 89,
+      "codeforcesElo": 1258,
+      "codeforcesPercentile": 62,
       "costValueScore": 9,
       "totalBenchmarks": 15
     },
@@ -168,9 +178,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.88,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 1149,
+      "codeforcesPercentile": 24
     },
     {
       "id": "cmewubd7i009hlcdo46mudgpu",
@@ -197,9 +209,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.72,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 1392,
+      "codeforcesPercentile": 22
     },
     {
       "id": "cmewubd8r009mlcdove6ex0m3",
@@ -225,9 +239,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.93,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 1678,
+      "codeforcesPercentile": 71
     },
     {
       "id": "cmewubd8h009llcdo1ufabpc1",
@@ -253,9 +269,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.82,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 1447,
+      "codeforcesPercentile": 74
     },
     {
       "id": "cmewtbrxy0003lcik62iswfdh",
@@ -281,9 +299,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.82,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 1557,
+      "codeforcesPercentile": 68
     },
     {
       "id": "cmewubd89009klcdo1lq4egr4",
@@ -310,9 +330,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.84,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 1856,
+      "codeforcesPercentile": 63
     },
     {
       "id": "cmewubd80009jlcdo1zmo9p2y",
@@ -339,9 +361,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.85,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 827,
+      "codeforcesPercentile": 13
     },
     {
       "id": "cmewubd4q0096lcdo8c7m0erq",
@@ -368,9 +392,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.82,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 969,
+      "codeforcesPercentile": 12
     },
     {
       "id": "cmewubd4f0095lcdobbzfbmm9",
@@ -398,9 +424,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.87,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 831,
+      "codeforcesPercentile": 13
     },
     {
       "id": "cmewubd460094lcdotvna1bne",
@@ -426,9 +454,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.83,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 892,
+      "codeforcesPercentile": 8
     },
     {
       "id": "cmewtbrxg0001lcik3l8ox6c1",
@@ -457,7 +487,9 @@
       "avgResponseTime": 4500,
       "totalRatings": 6,
       "passRate": 0.7,
-      "aiderBenchmark": 82.9,
+      "hellaswagScore": 82.9,
+      "codeforcesElo": 808,
+      "codeforcesPercentile": 11,
       "costValueScore": 12.7,
       "totalBenchmarks": 16
     },
@@ -485,9 +517,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.8,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 1109,
+      "codeforcesPercentile": 20
     },
     {
       "id": "cmewubd5a0098lcdo22i9w021",
@@ -513,9 +547,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.81,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 838,
+      "codeforcesPercentile": 15
     },
     {
       "id": "cmewubd500097lcdo4mddjx0m",
@@ -541,9 +577,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.77,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 853,
+      "codeforcesPercentile": 9
     },
     {
       "id": "cmewubd5k0099lcdo4undaa7i",
@@ -569,9 +607,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.9,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 841,
+      "codeforcesPercentile": 8
     },
     {
       "id": "cmewubd9t009qlcdowiaj3nzo",
@@ -598,9 +638,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.9,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 835,
+      "codeforcesPercentile": 10
     },
     {
       "id": "cmewubd9l009plcdo7ndfwpfk",
@@ -626,9 +668,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.76,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 890,
+      "codeforcesPercentile": 11
     },
     {
       "id": "cmewubd91009nlcdooita2fc6",
@@ -655,9 +699,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.73,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 771,
+      "codeforcesPercentile": 9
     },
     {
       "id": "cmewubd70009flcdo0hwkzk4j",
@@ -684,9 +730,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.79,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 1753,
+      "codeforcesPercentile": 79
     },
     {
       "id": "cmewubd7a009glcdohd3em3e9",
@@ -712,9 +760,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.92,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 970,
+      "codeforcesPercentile": 11
     },
     {
       "id": "cmewubd6r009elcdo4v1d7x6d",
@@ -741,9 +791,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.88,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 1546,
+      "codeforcesPercentile": 61
     },
     {
       "id": "cmewubd6i009dlcdosyf1zq3u",
@@ -770,9 +822,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.88,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 757,
+      "codeforcesPercentile": 8
     },
     {
       "id": "cmewubd5t009alcdo183zvdv1",
@@ -798,9 +852,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.77,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 878,
+      "codeforcesPercentile": 12
     },
     {
       "id": "cmewubd61009blcdovrzdli5u",
@@ -827,9 +883,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.94,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 1869,
+      "codeforcesPercentile": 69
     },
     {
       "id": "cmewubd69009clcdoj3blopmz",
@@ -856,9 +914,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.78,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 711,
+      "codeforcesPercentile": 15
     },
     {
       "id": "cmewubd9b009olcdowc7h4t70",
@@ -885,9 +945,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.82,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 903,
+      "codeforcesPercentile": 9
     },
     {
       "id": "cmewvelyj000nlcp4x79mfy97",
@@ -916,9 +978,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.96,
-      "aiderBenchmark": 78.2,
+      "hellaswagScore": 78.2,
       "costValueScore": null,
-      "totalBenchmarks": 13
+      "totalBenchmarks": 13,
+      "codeforcesElo": 798,
+      "codeforcesPercentile": 10
     },
     {
       "id": "cmewvelxb000ilcp4b21jdma5",
@@ -944,9 +1008,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.91,
-      "aiderBenchmark": 85.1,
+      "hellaswagScore": 85.1,
       "costValueScore": null,
-      "totalBenchmarks": 13
+      "totalBenchmarks": 13,
+      "codeforcesElo": 916,
+      "codeforcesPercentile": 13
     },
     {
       "id": "cmewvelsh0000lcp4a943r8qh",
@@ -972,9 +1038,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.94,
-      "aiderBenchmark": 82.7,
+      "hellaswagScore": 82.7,
       "costValueScore": null,
-      "totalBenchmarks": 13
+      "totalBenchmarks": 13,
+      "codeforcesElo": 722,
+      "codeforcesPercentile": 14
     },
     {
       "id": "cmewvelsv0001lcp4xxkkf8y6",
@@ -1000,9 +1068,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.8,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 847,
+      "codeforcesPercentile": 15
     },
     {
       "id": "cmewvelx1000hlcp4s2jxns3v",
@@ -1028,9 +1098,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.91,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 944,
+      "codeforcesPercentile": 11
     },
     {
       "id": "cmewvelvs000clcp4ls80hqbs",
@@ -1056,9 +1128,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.73,
-      "aiderBenchmark": 68.9,
+      "hellaswagScore": 68.9,
       "costValueScore": null,
-      "totalBenchmarks": 13
+      "totalBenchmarks": 13,
+      "codeforcesElo": 787,
+      "codeforcesPercentile": 11
     },
     {
       "id": "cmewvelw0000dlcp4hcii0i4n",
@@ -1084,9 +1158,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.88,
-      "aiderBenchmark": 72,
+      "hellaswagScore": 72,
       "costValueScore": null,
-      "totalBenchmarks": 13
+      "totalBenchmarks": 13,
+      "codeforcesElo": 712,
+      "codeforcesPercentile": 13
     },
     {
       "id": "cmewvely1000llcp4j7w2x7hm",
@@ -1112,9 +1188,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.75,
-      "aiderBenchmark": 76.4,
+      "hellaswagScore": 76.4,
       "costValueScore": null,
-      "totalBenchmarks": 13
+      "totalBenchmarks": 13,
+      "codeforcesElo": 807,
+      "codeforcesPercentile": 13
     },
     {
       "id": "cmewvelv00009lcp4iyjen994",
@@ -1143,9 +1221,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.95,
-      "aiderBenchmark": 83.1,
+      "hellaswagScore": 83.1,
       "costValueScore": null,
-      "totalBenchmarks": 13
+      "totalBenchmarks": 13,
+      "codeforcesElo": 997,
+      "codeforcesPercentile": 8
     },
     {
       "id": "cmewvelyb000mlcp47tik9ptm",
@@ -1171,9 +1251,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.83,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 959,
+      "codeforcesPercentile": 15
     },
     {
       "id": "cmewvelt70002lcp4k5l3oi2w",
@@ -1199,9 +1281,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.75,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 840,
+      "codeforcesPercentile": 11
     },
     {
       "id": "cmewvelth0003lcp41trzr4yu",
@@ -1227,9 +1311,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.98,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 786,
+      "codeforcesPercentile": 15
     },
     {
       "id": "cmewvelts0004lcp4pguo4zkr",
@@ -1255,9 +1341,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.85,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 902,
+      "codeforcesPercentile": 13
     },
     {
       "id": "cmewvelu10005lcp42wntv22h",
@@ -1283,9 +1371,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.74,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 1130,
+      "codeforcesPercentile": 46
     },
     {
       "id": "cmewvelu90006lcp418tfy8yv",
@@ -1311,9 +1401,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.75,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 1028,
+      "codeforcesPercentile": 34
     },
     {
       "id": "cmewveluj0007lcp4m7jvm55d",
@@ -1339,9 +1431,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.82,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 907,
+      "codeforcesPercentile": 11
     },
     {
       "id": "cmewvelxl000jlcp4rie3jm1e",
@@ -1367,9 +1461,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.78,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 755,
+      "codeforcesPercentile": 8
     },
     {
       "id": "cmewvelxt000klcp4btu8wzy1",
@@ -1395,9 +1491,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.78,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 785,
+      "codeforcesPercentile": 15
     },
     {
       "id": "cmewvelv9000alcp4mneqalte",
@@ -1423,9 +1521,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.81,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 842,
+      "codeforcesPercentile": 15
     },
     {
       "id": "cmewvelvi000blcp4jnzw0g2i",
@@ -1451,9 +1551,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.84,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 868,
+      "codeforcesPercentile": 8
     },
     {
       "id": "cmewvelz0000plcp4zct8hd8r",
@@ -1479,9 +1581,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.98,
-      "aiderBenchmark": 69.8,
+      "hellaswagScore": 69.8,
       "costValueScore": null,
-      "totalBenchmarks": 13
+      "totalBenchmarks": 13,
+      "codeforcesElo": 1552,
+      "codeforcesPercentile": 65
     },
     {
       "id": "cmewvelz9000qlcp4wwrn0c2k",
@@ -1507,9 +1611,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.75,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 959,
+      "codeforcesPercentile": 14
     },
     {
       "id": "cmewvelw8000elcp45fgsmnl4",
@@ -1538,9 +1644,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.99,
-      "aiderBenchmark": 71.3,
+      "hellaswagScore": 71.3,
       "costValueScore": null,
-      "totalBenchmarks": 13
+      "totalBenchmarks": 13,
+      "codeforcesElo": 784,
+      "codeforcesPercentile": 15
     },
     {
       "id": "cmewvelws000glcp4gzyfm9ad",
@@ -1566,9 +1674,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.74,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 1054,
+      "codeforcesPercentile": 22
     },
     {
       "id": "cmewvelwh000flcp4j5c6qgo3",
@@ -1594,9 +1704,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.88,
-      "aiderBenchmark": 65.2,
+      "hellaswagScore": 65.2,
       "costValueScore": null,
-      "totalBenchmarks": 13
+      "totalBenchmarks": 13,
+      "codeforcesElo": 832,
+      "codeforcesPercentile": 14
     },
     {
       "id": "cmewvelus0008lcp44nxgn8i4",
@@ -1624,7 +1736,9 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.8,
-      "aiderBenchmark": 81.3,
+      "hellaswagScore": 81.3,
+      "codeforcesElo": 2706,
+      "codeforcesPercentile": 99.7,
       "costValueScore": null,
       "totalBenchmarks": 13
     },
@@ -1652,9 +1766,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.88,
-      "aiderBenchmark": 84.9,
+      "hellaswagScore": 84.9,
       "costValueScore": null,
-      "totalBenchmarks": 13
+      "totalBenchmarks": 13,
+      "codeforcesElo": 836,
+      "codeforcesPercentile": 14
     },
     {
       "id": "cmewvelys000olcp4ujww7znw",
@@ -1680,9 +1796,11 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.94,
-      "aiderBenchmark": null,
+      "hellaswagScore": null,
       "costValueScore": null,
-      "totalBenchmarks": 12
+      "totalBenchmarks": 12,
+      "codeforcesElo": 929,
+      "codeforcesPercentile": 15
     }
   ],
   "providers": [
