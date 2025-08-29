@@ -72,7 +72,8 @@ async function checkModels() {
         category: true,
         isFree: true,
         isRecommended: true,
-        isAvailableInCursor: true
+        isAvailableInCursor: true,
+        isReasoning: true
       },
       orderBy: { name: 'asc' }
     });
@@ -82,8 +83,26 @@ async function checkModels() {
       const status = model.isFree ? 'Бесплатная' : 'Премиум';
       const recommended = model.isRecommended ? ' ⭐' : '';
       const cursorIcon = model.isAvailableInCursor ? ' 🖱️' : '';
-      console.log(`  ${model.name} (${model.provider}) - ${model.category} - ${status}${recommended}${cursorIcon}`);
+      const reasoningIcon = model.isReasoning ? ' 🧠' : '';
+      console.log(`  ${model.name} (${model.provider}) - ${model.category} - ${status}${recommended}${cursorIcon}${reasoningIcon}`);
     });
+
+    // Показываем reasoning модели
+    const reasoningModels = await prisma.aIModel.findMany({
+      where: { isReasoning: true },
+      select: { name: true, provider: true },
+      orderBy: { name: 'asc' }
+    });
+
+    console.log(`\n🧠 Reasoning моделей (${reasoningModels.length}):`);
+    if (reasoningModels.length > 0) {
+      reasoningModels.slice(0, 10).forEach(model => {
+        console.log(`  ${model.name} (${model.provider})`);
+      });
+      if (reasoningModels.length > 10) {
+        console.log(`  ... и еще ${reasoningModels.length - 10} моделей`);
+      }
+    }
 
   } catch (error) {
     console.error('❌ Ошибка при проверке моделей:', error);

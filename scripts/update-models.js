@@ -6,15 +6,16 @@ async function updateExistingModels() {
   try {
     console.log('🔄 Начинаем обновление существующих моделей...');
 
-    // Шаг 1: Убираем метку recommended и устанавливаем isAvailableInCursor у всех моделей
-    const recommendedUpdate = await prisma.aIModel.updateMany({
+    // Шаг 1: Сбрасываем все флаги для корректной работы парсера
+    const resetUpdate = await prisma.aIModel.updateMany({
       data: {
         isRecommended: false,
-        isAvailableInCursor: true
+        isAvailableInCursor: false,
+        isReasoning: false
       }
     });
 
-    console.log(`✅ Обновлено ${recommendedUpdate.count} моделей (убрана метка recommended, установлена доступность в Cursor)`);
+    console.log(`✅ Сброшены флаги для ${resetUpdate.count} моделей (recommended, cursor, reasoning)`);
 
     // Шаг 2: Устанавливаем правильные значения isFree
     // Сначала сбрасываем все модели как платные

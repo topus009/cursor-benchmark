@@ -11,7 +11,7 @@ import {
   SortingState,
   ColumnFiltersState
 } from '@tanstack/react-table'
-import { ArrowUpDown, ArrowUp, ArrowDown, Star, Clock, DollarSign, Zap, MessageSquare, Code } from 'lucide-react'
+import { ArrowUpDown, ArrowUp, ArrowDown, Star, Clock, DollarSign, Zap, MessageSquare, Code, Brain } from 'lucide-react'
 import { ModelRatingForm } from './ModelRatingForm'
 import { ModelBenchmarkDetails } from './ModelBenchmarkDetails'
 
@@ -29,6 +29,7 @@ interface AIModel {
   isFree: boolean
   isRecommended: boolean
   isAvailableInCursor?: boolean
+  isReasoning?: boolean
   category: string
   capabilities: string[]
   lastUpdated: string
@@ -221,12 +222,20 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
           <div>
             <div className="flex items-center gap-2">
               <div className="font-medium text-gray-900 dark:text-white">{row.original.displayName}</div>
-              {row.original.isAvailableInCursor && (
-                <Code
-                  className="h-4 w-4 text-blue-600 dark:text-blue-400"
-                  title="Доступно в Cursor IDE"
-                />
-              )}
+              <div className="flex items-center gap-1">
+                {row.original.isAvailableInCursor && (
+                  <Code
+                    className="h-4 w-4 text-blue-600 dark:text-blue-400"
+                    title="Доступно в Cursor IDE"
+                  />
+                )}
+                {row.original.isReasoning && (
+                  <Brain
+                    className="h-4 w-4 text-purple-600 dark:text-purple-400"
+                    title="Модель с reasoning способностями"
+                  />
+                )}
+              </div>
             </div>
             <div className="text-sm text-gray-600 dark:text-gray-400">{row.original.provider}</div>
             {row.original.isRecommended && (

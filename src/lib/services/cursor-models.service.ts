@@ -15,6 +15,7 @@ export interface CursorModel {
   isFree: boolean
   isRecommended: boolean
   isAvailableInCursor?: boolean
+  isReasoning?: boolean
   category: string
   capabilities: string[]
 }
@@ -90,7 +91,8 @@ export class CursorModelsService {
         pricingOutput: model.pricing?.output,
         isFree: model.isFree,
         isRecommended: model.isRecommended,
-        isAvailableInCursor: model.isAvailableInCursor || true, // По умолчанию доступны в Cursor
+        isAvailableInCursor: model.isAvailableInCursor || false, // Только из HTML файла
+        isReasoning: model.isReasoning || false,
         category: model.category,
         capabilities: JSON.stringify(model.capabilities),
         lastUpdated: new Date()
@@ -107,7 +109,8 @@ export class CursorModelsService {
         pricingOutput: model.pricing?.output,
         isFree: model.isFree,
         isRecommended: model.isRecommended,
-        isAvailableInCursor: model.isAvailableInCursor || true, // По умолчанию доступны в Cursor
+        isAvailableInCursor: model.isAvailableInCursor || false, // Только из HTML файла
+        isReasoning: model.isReasoning || false,
         category: model.category,
         capabilities: JSON.stringify(model.capabilities)
       }

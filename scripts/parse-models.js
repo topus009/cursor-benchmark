@@ -30,6 +30,9 @@ function parseHTMLModels() {
       // Определяем, является ли модель премиум (MAX Only)
       const isPremium = htmlContent.substring(currentIndex, match.index).includes('MAX Only');
 
+      // Определяем, есть ли у модели reasoning способности (наличие codicon codicon-brain)
+      const hasReasoning = htmlContent.substring(currentIndex, match.index).includes('codicon codicon-brain');
+
       // Все модели из HTML файла доступны в Cursor
       const isAvailableInCursor = true;
 
@@ -104,7 +107,8 @@ function parseHTMLModels() {
         isFree: isFree,
         isRecommended: false, // Убрана логика recommended
         isAvailableInCursor: isAvailableInCursor,
-        description: `${category === 'coding' ? 'Модель для программирования' : 'Универсальная модель ИИ'} от ${provider}${isFree ? ' (бесплатная)' : ''}`,
+        isReasoning: hasReasoning,
+        description: `${category === 'coding' ? 'Модель для программирования' : 'Универсальная модель ИИ'} от ${provider}${isFree ? ' (бесплатная)' : ''}${hasReasoning ? ' (с reasoning)' : ''}`,
         capabilities: JSON.stringify([
           category === 'coding' ? 'code_generation' : 'text_generation',
           'analysis',
@@ -139,7 +143,21 @@ async function importModelsToDatabase(models) {
       });
 
       if (existing) {
-        console.log(`Модель ${model.name} уже существует, пропускаем`);
+        // Обновляем существующую модель с правильными флагами
+        await prisma.aIModel.update({
+          where: { modelId: model.modelId },
+          data: {
+            isAvailableInCursor: model.isAvailableInCursor,
+            isReasoning: model.isReasoning,
+            // Обновляем другие поля только если они изменились
+            displayName: model.displayName,
+            description: model.description,
+            category: model.category,
+            isFree: model.isFree,
+            capabilities: model.capabilities
+          }
+        });
+        console.log(`🔄 Обновлена модель: ${model.name} (доступна в Cursor: ${model.isAvailableInCursor}, reasoning: ${model.isReasoning})`);
         skipped++;
         continue;
       }
