@@ -11,24 +11,22 @@
       "pricingOutput": 0.00125,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": true,
       "category": "chat",
       "capabilities": [
-        "tool_use",
-        "function_calling",
-        "multi_step_reasoning"
+        "chat",
+        "summarization",
+        "basic_coding"
       ],
-      "avgRating": 4.2,
-      "avgResponseTime": 4333,
-      "totalRatings": 6,
-      "passRate": 0.75,
-      "hellaswagScore": 85,
-      "codeforcesElo": 750,
-      "codeforcesPercentile": 8,
-      "costValueScore": 2.7,
-      "totalBenchmarks": 15
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.86,
+      "aiderBenchmark": 85,
+      "costValueScore": null,
+      "totalBenchmarks": 23
     },
     {
       "id": "cmewubd2u008zlcdoxqw5oeon",
@@ -41,24 +39,24 @@
       "pricingOutput": 0.075,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": true,
       "category": "coding",
       "capabilities": [
-        "tool_use",
-        "function_calling",
-        "multi_step_reasoning"
+        "code_generation",
+        "analysis",
+        "reasoning",
+        "research",
+        "documentation"
       ],
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.76,
-      "hellaswagScore": null,
+      "passRate": 0.82,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 1252,
-      "codeforcesPercentile": 18
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd340090lcdo4uwipt4j",
@@ -71,24 +69,23 @@
       "pricingOutput": 0.015,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": true,
       "category": "chat",
       "capabilities": [
-        "tool_use",
-        "function_calling",
-        "multi_step_reasoning"
+        "chat",
+        "analysis",
+        "writing",
+        "coding"
       ],
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.72,
-      "hellaswagScore": null,
+      "passRate": 0.99,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 938,
-      "codeforcesPercentile": 12
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd2l008ylcdoccig6hnw",
@@ -101,7 +98,7 @@
       "pricingOutput": 0.004,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": false,
       "category": "chat",
@@ -115,15 +112,13 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.85,
-      "hellaswagScore": null,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 959,
-      "codeforcesPercentile": 14
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewtbrws0000lcik751r1yol",
-      "name": "claude-3-5-sonnet-20240304",
+      "name": "claude-3-5-sonnet-20241022",
       "displayName": "Claude 3.5 Sonnet",
       "provider": "Anthropic",
       "description": "Most intelligent model for complex reasoning and coding tasks",
@@ -132,26 +127,25 @@
       "pricingOutput": 0.015,
       "isFree": false,
       "isRecommended": true,
-      "isAvailableInCursor": true,
-      "isReasoning": true,
+      "isAvailableInCursor": false,
+      "isReasoning": false,
       "isAgent": true,
       "category": "coding",
       "capabilities": [
-        "tool_use",
-        "function_calling",
-        "multi_step_reasoning",
         "code_generation",
-        "analysis"
+        "code_review",
+        "debugging",
+        "documentation",
+        "analysis",
+        "reasoning"
       ],
-      "avgRating": 4.8,
-      "avgResponseTime": 4667,
-      "totalRatings": 6,
-      "passRate": 0.76,
-      "hellaswagScore": 89,
-      "codeforcesElo": 1258,
-      "codeforcesPercentile": 62,
-      "costValueScore": 9,
-      "totalBenchmarks": 15
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.8,
+      "aiderBenchmark": 86.3,
+      "costValueScore": null,
+      "totalBenchmarks": 24
     },
     {
       "id": "cmewubd7q009ilcdoqyk1kjm8",
@@ -164,7 +158,7 @@
       "pricingOutput": 0.00018,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": false,
       "category": "coding",
@@ -177,12 +171,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.88,
-      "hellaswagScore": null,
+      "passRate": 0.99,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 1149,
-      "codeforcesPercentile": 24
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd7i009hlcdo46mudgpu",
@@ -195,7 +187,7 @@
       "pricingOutput": 0.00018,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": false,
       "category": "coding",
@@ -208,12 +200,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.72,
-      "hellaswagScore": null,
+      "passRate": 0.97,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 1392,
-      "codeforcesPercentile": 22
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd8r009mlcdove6ex0m3",
@@ -226,24 +216,23 @@
       "pricingOutput": 0.0015,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": true,
       "category": "chat",
       "capabilities": [
-        "tool_use",
-        "function_calling",
-        "multi_step_reasoning"
+        "chat",
+        "analysis",
+        "writing",
+        "reasoning"
       ],
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.93,
-      "hellaswagScore": null,
+      "passRate": 0.74,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 1678,
-      "codeforcesPercentile": 71
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd8h009llcdo1ufabpc1",
@@ -256,24 +245,23 @@
       "pricingOutput": 0.0045,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": true,
       "category": "chat",
       "capabilities": [
-        "tool_use",
-        "function_calling",
-        "multi_step_reasoning"
+        "chat",
+        "analysis",
+        "writing",
+        "reasoning"
       ],
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.82,
-      "hellaswagScore": null,
+      "passRate": 0.74,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 1447,
-      "codeforcesPercentile": 74
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewtbrxy0003lcik62iswfdh",
@@ -286,24 +274,22 @@
       "pricingOutput": 0,
       "isFree": true,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": true,
       "category": "chat",
       "capabilities": [
-        "tool_use",
-        "function_calling",
-        "multi_step_reasoning"
+        "chat",
+        "basic_coding",
+        "summarization"
       ],
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.82,
-      "hellaswagScore": null,
+      "passRate": 0.81,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 1557,
-      "codeforcesPercentile": 68
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd89009klcdo1lq4egr4",
@@ -316,7 +302,7 @@
       "pricingOutput": 0.00028,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": false,
       "category": "chat",
@@ -329,12 +315,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.84,
-      "hellaswagScore": null,
+      "passRate": 0.87,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 1856,
-      "codeforcesPercentile": 63
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd80009jlcdo1zmo9p2y",
@@ -347,7 +331,7 @@
       "pricingOutput": 0.00028,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": false,
       "category": "coding",
@@ -360,12 +344,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.85,
-      "hellaswagScore": null,
+      "passRate": 0.87,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 827,
-      "codeforcesPercentile": 13
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd4q0096lcdo8c7m0erq",
@@ -378,7 +360,7 @@
       "pricingOutput": 0.0015,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": false,
       "category": "chat",
@@ -391,12 +373,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.82,
-      "hellaswagScore": null,
+      "passRate": 0.99,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 969,
-      "codeforcesPercentile": 12
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd4f0095lcdobbzfbmm9",
@@ -409,26 +389,23 @@
       "pricingOutput": 0.06,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": true,
       "category": "chat",
       "capabilities": [
-        "tool_use",
-        "function_calling",
-        "multi_step_reasoning",
-        "code_generation",
-        "analysis"
+        "chat",
+        "analysis",
+        "writing",
+        "coding"
       ],
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.87,
-      "hellaswagScore": null,
+      "passRate": 0.81,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 831,
-      "codeforcesPercentile": 13
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd460094lcdotvna1bne",
@@ -441,24 +418,23 @@
       "pricingOutput": 0.03,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": true,
       "category": "coding",
       "capabilities": [
-        "tool_use",
-        "function_calling",
-        "multi_step_reasoning"
+        "code_generation",
+        "analysis",
+        "reasoning",
+        "documentation"
       ],
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.83,
-      "hellaswagScore": null,
+      "passRate": 0.74,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 892,
-      "codeforcesPercentile": 8
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewtbrxg0001lcik3l8ox6c1",
@@ -471,27 +447,24 @@
       "pricingOutput": 0.015,
       "isFree": false,
       "isRecommended": true,
-      "isAvailableInCursor": false,
+      "isAvailableInCursor": true,
       "isReasoning": false,
       "isAgent": true,
       "category": "chat",
       "capabilities": [
-        "tool_use",
-        "function_calling",
-        "multi_step_reasoning",
-        "code_generation",
+        "chat",
         "analysis",
-        "vision"
+        "writing",
+        "coding",
+        "reasoning"
       ],
-      "avgRating": 4.2,
-      "avgResponseTime": 4500,
-      "totalRatings": 6,
-      "passRate": 0.7,
-      "hellaswagScore": 82.9,
-      "codeforcesElo": 808,
-      "codeforcesPercentile": 11,
-      "costValueScore": 12.7,
-      "totalBenchmarks": 16
+      "avgRating": null,
+      "avgResponseTime": null,
+      "totalRatings": 0,
+      "passRate": 0.8,
+      "aiderBenchmark": 82.9,
+      "costValueScore": null,
+      "totalBenchmarks": 25
     },
     {
       "id": "cmewubd3w0093lcdo5zqohcd0",
@@ -504,24 +477,23 @@
       "pricingOutput": 0.0006,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": true,
       "category": "chat",
       "capabilities": [
-        "tool_use",
-        "function_calling",
-        "multi_step_reasoning"
+        "chat",
+        "analysis",
+        "writing",
+        "basic_coding"
       ],
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.8,
-      "hellaswagScore": null,
+      "passRate": 0.96,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 1109,
-      "codeforcesPercentile": 20
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd5a0098lcdo22i9w021",
@@ -534,24 +506,23 @@
       "pricingOutput": 0.0003,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": true,
       "category": "chat",
       "capabilities": [
-        "tool_use",
-        "function_calling",
-        "multi_step_reasoning"
+        "chat",
+        "analysis",
+        "multimodal",
+        "basic_coding"
       ],
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.81,
-      "hellaswagScore": null,
+      "passRate": 0.77,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 838,
-      "codeforcesPercentile": 15
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd500097lcdo4mddjx0m",
@@ -564,24 +535,24 @@
       "pricingOutput": 0.0005,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": true,
       "category": "coding",
       "capabilities": [
-        "tool_use",
-        "function_calling",
-        "multi_step_reasoning"
+        "code_generation",
+        "analysis",
+        "reasoning",
+        "multimodal",
+        "documentation"
       ],
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.77,
-      "hellaswagScore": null,
+      "passRate": 0.92,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 853,
-      "codeforcesPercentile": 9
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd5k0099lcdo4undaa7i",
@@ -594,24 +565,23 @@
       "pricingOutput": 0.0005,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": true,
       "category": "chat",
       "capabilities": [
-        "tool_use",
-        "function_calling",
-        "multi_step_reasoning"
+        "chat",
+        "analysis",
+        "writing",
+        "basic_coding"
       ],
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.9,
-      "hellaswagScore": null,
+      "passRate": 0.77,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 841,
-      "codeforcesPercentile": 8
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd9t009qlcdowiaj3nzo",
@@ -624,7 +594,7 @@
       "pricingOutput": 0.004,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": false,
       "category": "chat",
@@ -637,12 +607,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.9,
-      "hellaswagScore": null,
+      "passRate": 0.93,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 835,
-      "codeforcesPercentile": 10
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd9l009plcdo7ndfwpfk",
@@ -655,24 +623,23 @@
       "pricingOutput": 0.01,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": true,
       "category": "chat",
       "capabilities": [
-        "tool_use",
-        "function_calling",
-        "multi_step_reasoning"
+        "chat",
+        "analysis",
+        "reasoning",
+        "humor"
       ],
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.76,
-      "hellaswagScore": null,
+      "passRate": 0.98,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 890,
-      "codeforcesPercentile": 11
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd91009nlcdooita2fc6",
@@ -685,7 +652,7 @@
       "pricingOutput": 0.0009,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": false,
       "category": "coding",
@@ -698,12 +665,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.73,
-      "hellaswagScore": null,
+      "passRate": 0.92,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 771,
-      "codeforcesPercentile": 9
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd70009flcdo0hwkzk4j",
@@ -716,7 +681,7 @@
       "pricingOutput": 0.00015,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": false,
       "category": "chat",
@@ -729,12 +694,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.79,
-      "hellaswagScore": null,
+      "passRate": 0.8,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 1753,
-      "codeforcesPercentile": 79
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd7a009glcdohd3em3e9",
@@ -747,7 +710,7 @@
       "pricingOutput": 0.00006,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": false,
       "category": "chat",
@@ -759,12 +722,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.92,
-      "hellaswagScore": null,
+      "passRate": 0.93,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 970,
-      "codeforcesPercentile": 11
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd6r009elcdo4v1d7x6d",
@@ -777,7 +738,7 @@
       "pricingOutput": 0.00054,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": false,
       "category": "coding",
@@ -790,12 +751,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.88,
-      "hellaswagScore": null,
+      "passRate": 0.8,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 1546,
-      "codeforcesPercentile": 61
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd6i009dlcdosyf1zq3u",
@@ -808,7 +767,7 @@
       "pricingOutput": 0.00072,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": false,
       "category": "coding",
@@ -821,12 +780,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.88,
-      "hellaswagScore": null,
+      "passRate": 0.92,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 757,
-      "codeforcesPercentile": 8
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd5t009alcdo183zvdv1",
@@ -839,24 +796,23 @@
       "pricingOutput": 0.006,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": true,
       "category": "coding",
       "capabilities": [
-        "tool_use",
-        "function_calling",
-        "multi_step_reasoning"
+        "code_generation",
+        "analysis",
+        "reasoning",
+        "documentation"
       ],
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.77,
-      "hellaswagScore": null,
+      "passRate": 0.88,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 878,
-      "codeforcesPercentile": 12
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd61009blcdovrzdli5u",
@@ -869,7 +825,7 @@
       "pricingOutput": 0.00243,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": false,
       "category": "chat",
@@ -882,12 +838,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.94,
-      "hellaswagScore": null,
+      "passRate": 0.93,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 1869,
-      "codeforcesPercentile": 69
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd69009clcdoj3blopmz",
@@ -900,7 +854,7 @@
       "pricingOutput": 0.00081,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": false,
       "category": "chat",
@@ -913,12 +867,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.78,
-      "hellaswagScore": null,
+      "passRate": 0.81,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 711,
-      "codeforcesPercentile": 15
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewubd9b009olcdowc7h4t70",
@@ -931,7 +883,7 @@
       "pricingOutput": 0.0006,
       "isFree": false,
       "isRecommended": false,
-      "isAvailableInCursor": true,
+      "isAvailableInCursor": false,
       "isReasoning": false,
       "isAgent": false,
       "category": "chat",
@@ -944,12 +896,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.82,
-      "hellaswagScore": null,
+      "passRate": 0.72,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 903,
-      "codeforcesPercentile": 9
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewvelyj000nlcp4x79mfy97",
@@ -977,12 +927,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.96,
-      "hellaswagScore": 78.2,
+      "passRate": 0.87,
+      "aiderBenchmark": 78.2,
       "costValueScore": null,
-      "totalBenchmarks": 13,
-      "codeforcesElo": 798,
-      "codeforcesPercentile": 10
+      "totalBenchmarks": 22
     },
     {
       "id": "cmewvelxb000ilcp4b21jdma5",
@@ -1007,12 +955,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.91,
-      "hellaswagScore": 85.1,
+      "passRate": 0.73,
+      "aiderBenchmark": 85.1,
       "costValueScore": null,
-      "totalBenchmarks": 13,
-      "codeforcesElo": 916,
-      "codeforcesPercentile": 13
+      "totalBenchmarks": 22
     },
     {
       "id": "cmewvelsh0000lcp4a943r8qh",
@@ -1037,12 +983,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.94,
-      "hellaswagScore": 82.7,
+      "passRate": 0.91,
+      "aiderBenchmark": 82.7,
       "costValueScore": null,
-      "totalBenchmarks": 13,
-      "codeforcesElo": 722,
-      "codeforcesPercentile": 14
+      "totalBenchmarks": 22
     },
     {
       "id": "cmewvelsv0001lcp4xxkkf8y6",
@@ -1067,12 +1011,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.8,
-      "hellaswagScore": null,
+      "passRate": 0.71,
+      "aiderBenchmark": 81.5,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 847,
-      "codeforcesPercentile": 15
+      "totalBenchmarks": 22
     },
     {
       "id": "cmewvelx1000hlcp4s2jxns3v",
@@ -1097,12 +1039,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.91,
-      "hellaswagScore": null,
+      "passRate": 0.95,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 944,
-      "codeforcesPercentile": 11
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewvelvs000clcp4ls80hqbs",
@@ -1127,12 +1067,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.73,
-      "hellaswagScore": 68.9,
+      "passRate": 0.83,
+      "aiderBenchmark": 68.9,
       "costValueScore": null,
-      "totalBenchmarks": 13,
-      "codeforcesElo": 787,
-      "codeforcesPercentile": 11
+      "totalBenchmarks": 22
     },
     {
       "id": "cmewvelw0000dlcp4hcii0i4n",
@@ -1157,12 +1095,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.88,
-      "hellaswagScore": 72,
+      "passRate": 0.79,
+      "aiderBenchmark": 72,
       "costValueScore": null,
-      "totalBenchmarks": 13,
-      "codeforcesElo": 712,
-      "codeforcesPercentile": 13
+      "totalBenchmarks": 22
     },
     {
       "id": "cmewvely1000llcp4j7w2x7hm",
@@ -1187,12 +1123,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.75,
-      "hellaswagScore": 76.4,
+      "passRate": 0.77,
+      "aiderBenchmark": 76.4,
       "costValueScore": null,
-      "totalBenchmarks": 13,
-      "codeforcesElo": 807,
-      "codeforcesPercentile": 13
+      "totalBenchmarks": 22
     },
     {
       "id": "cmewvelv00009lcp4iyjen994",
@@ -1221,11 +1155,9 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.95,
-      "hellaswagScore": 83.1,
+      "aiderBenchmark": 83.1,
       "costValueScore": null,
-      "totalBenchmarks": 13,
-      "codeforcesElo": 997,
-      "codeforcesPercentile": 8
+      "totalBenchmarks": 22
     },
     {
       "id": "cmewvelyb000mlcp47tik9ptm",
@@ -1250,12 +1182,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.83,
-      "hellaswagScore": null,
+      "passRate": 0.87,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 959,
-      "codeforcesPercentile": 15
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewvelt70002lcp4k5l3oi2w",
@@ -1280,12 +1210,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.75,
-      "hellaswagScore": null,
+      "passRate": 0.76,
+      "aiderBenchmark": 79.2,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 840,
-      "codeforcesPercentile": 11
+      "totalBenchmarks": 22
     },
     {
       "id": "cmewvelth0003lcp41trzr4yu",
@@ -1310,12 +1238,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.98,
-      "hellaswagScore": null,
+      "passRate": 0.91,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 786,
-      "codeforcesPercentile": 15
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewvelts0004lcp4pguo4zkr",
@@ -1340,12 +1266,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.85,
-      "hellaswagScore": null,
+      "passRate": 0.79,
+      "aiderBenchmark": 82.1,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 902,
-      "codeforcesPercentile": 13
+      "totalBenchmarks": 22
     },
     {
       "id": "cmewvelu10005lcp42wntv22h",
@@ -1370,12 +1294,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.74,
-      "hellaswagScore": null,
+      "passRate": 0.78,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 1130,
-      "codeforcesPercentile": 46
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewvelu90006lcp418tfy8yv",
@@ -1400,12 +1322,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.75,
-      "hellaswagScore": null,
+      "passRate": 0.93,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 1028,
-      "codeforcesPercentile": 34
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewveluj0007lcp4m7jvm55d",
@@ -1430,12 +1350,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.82,
-      "hellaswagScore": null,
+      "passRate": 0.95,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 907,
-      "codeforcesPercentile": 11
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewvelxl000jlcp4rie3jm1e",
@@ -1461,11 +1379,9 @@
       "avgResponseTime": null,
       "totalRatings": 0,
       "passRate": 0.78,
-      "hellaswagScore": null,
+      "aiderBenchmark": 78.8,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 755,
-      "codeforcesPercentile": 8
+      "totalBenchmarks": 22
     },
     {
       "id": "cmewvelxt000klcp4btu8wzy1",
@@ -1490,12 +1406,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.78,
-      "hellaswagScore": null,
+      "passRate": 0.89,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 785,
-      "codeforcesPercentile": 15
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewvelv9000alcp4mneqalte",
@@ -1520,12 +1434,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.81,
-      "hellaswagScore": null,
+      "passRate": 0.7,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 842,
-      "codeforcesPercentile": 15
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewvelvi000blcp4jnzw0g2i",
@@ -1550,12 +1462,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.84,
-      "hellaswagScore": null,
+      "passRate": 0.78,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 868,
-      "codeforcesPercentile": 8
+      "totalBenchmarks": 20
     },
     {
       "id": "cmewvelz0000plcp4zct8hd8r",
@@ -1580,12 +1490,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.98,
-      "hellaswagScore": 69.8,
+      "passRate": 0.99,
+      "aiderBenchmark": 69.8,
       "costValueScore": null,
-      "totalBenchmarks": 13,
-      "codeforcesElo": 1552,
-      "codeforcesPercentile": 65
+      "totalBenchmarks": 22
     },
     {
       "id": "cmewvelz9000qlcp4wwrn0c2k",
@@ -1610,12 +1518,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.75,
-      "hellaswagScore": null,
+      "passRate": 0.95,
+      "aiderBenchmark": 67.1,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 959,
-      "codeforcesPercentile": 14
+      "totalBenchmarks": 22
     },
     {
       "id": "cmewvelw8000elcp45fgsmnl4",
@@ -1643,12 +1549,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.99,
-      "hellaswagScore": 71.3,
+      "passRate": 0.91,
+      "aiderBenchmark": 71.3,
       "costValueScore": null,
-      "totalBenchmarks": 13,
-      "codeforcesElo": 784,
-      "codeforcesPercentile": 15
+      "totalBenchmarks": 22
     },
     {
       "id": "cmewvelws000glcp4gzyfm9ad",
@@ -1673,12 +1577,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.74,
-      "hellaswagScore": null,
+      "passRate": 0.9,
+      "aiderBenchmark": 66.8,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 1054,
-      "codeforcesPercentile": 22
+      "totalBenchmarks": 22
     },
     {
       "id": "cmewvelwh000flcp4j5c6qgo3",
@@ -1703,12 +1605,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.88,
-      "hellaswagScore": 65.2,
+      "passRate": 0.94,
+      "aiderBenchmark": 65.2,
       "costValueScore": null,
-      "totalBenchmarks": 13,
-      "codeforcesElo": 832,
-      "codeforcesPercentile": 14
+      "totalBenchmarks": 22
     },
     {
       "id": "cmewvelus0008lcp44nxgn8i4",
@@ -1735,12 +1635,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.8,
-      "hellaswagScore": 81.3,
-      "codeforcesElo": 2706,
-      "codeforcesPercentile": 99.7,
+      "passRate": 0.97,
+      "aiderBenchmark": 81.3,
       "costValueScore": null,
-      "totalBenchmarks": 13
+      "totalBenchmarks": 22
     },
     {
       "id": "cmewvelzi000rlcp401eaqc40",
@@ -1765,12 +1663,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.88,
-      "hellaswagScore": 84.9,
+      "passRate": 0.99,
+      "aiderBenchmark": 84.9,
       "costValueScore": null,
-      "totalBenchmarks": 13,
-      "codeforcesElo": 836,
-      "codeforcesPercentile": 14
+      "totalBenchmarks": 22
     },
     {
       "id": "cmewvelys000olcp4ujww7znw",
@@ -1795,12 +1691,10 @@
       "avgRating": null,
       "avgResponseTime": null,
       "totalRatings": 0,
-      "passRate": 0.94,
-      "hellaswagScore": null,
+      "passRate": 0.75,
+      "aiderBenchmark": null,
       "costValueScore": null,
-      "totalBenchmarks": 12,
-      "codeforcesElo": 929,
-      "codeforcesPercentile": 15
+      "totalBenchmarks": 20
     }
   ],
   "providers": [
@@ -1824,11 +1718,11 @@
   ],
   "stats": {
     "total": 59,
-    "withCursor": 58,
+    "withCursor": 29,
     "withReasoning": 17,
     "withAgent": 23,
     "free": 3,
     "premium": 56
   },
-  "exportedAt": "2025-08-29T15:22:14.311Z"
+  "exportedAt": "2025-09-10T21:39:08.676Z"
 }
