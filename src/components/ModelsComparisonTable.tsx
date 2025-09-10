@@ -183,34 +183,54 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
   // Вычисляем метрики для каждой модели
   const modelsWithMetrics = useMemo(() => {
     return models.map(model => {
+      // Если у модели уже есть готовые метрики (статический режим), используем их
+      if ((model as any).avgRating !== undefined || (model as any).totalBenchmarks !== undefined) {
+        return {
+          ...model,
+          avgRating: (model as any).avgRating || null,
+          avgSpeedRating: (model as any).avgSpeedRating || null,
+          avgQualityRating: (model as any).avgQualityRating || null,
+          avgCostRating: (model as any).avgCostRating || null,
+          avgResponseTime: (model as any).avgResponseTime || null,
+          successRate: (model as any).successRate || null,
+          passRate: (model as any).passRate || null,
+          totalBenchmarks: (model as any).totalBenchmarks || 0,
+          totalRatings: (model as any).totalRatings || 0
+        }
+      }
+
+      // Иначе вычисляем метрики из связанных данных (режим базы данных)
+      const userRatings = model.userRatings || []
+      
       // Вычисляем средние оценки пользователей
-      const avgRating = model.userRatings.length > 0
-        ? model.userRatings.reduce((sum, r) => sum + r.rating, 0) / model.userRatings.length
+      const avgRating = userRatings.length > 0
+        ? userRatings.reduce((sum, r) => sum + r.rating, 0) / userRatings.length
         : 0
 
-      const avgSpeedRating = model.userRatings.length > 0
-        ? model.userRatings
+      const avgSpeedRating = userRatings.length > 0
+        ? userRatings
             .filter(r => r.speedRating)
             .reduce((sum, r) => sum + (r.speedRating || 0), 0) /
-          model.userRatings.filter(r => r.speedRating).length || 0
+          userRatings.filter(r => r.speedRating).length || 0
         : 0
 
-      const avgQualityRating = model.userRatings.length > 0
-        ? model.userRatings
+      const avgQualityRating = userRatings.length > 0
+        ? userRatings
             .filter(r => r.qualityRating)
             .reduce((sum, r) => sum + (r.qualityRating || 0), 0) /
-          model.userRatings.filter(r => r.qualityRating).length || 0
+          userRatings.filter(r => r.qualityRating).length || 0
         : 0
 
-      const avgCostRating = model.userRatings.length > 0
-        ? model.userRatings
+      const avgCostRating = userRatings.length > 0
+        ? userRatings
             .filter(r => r.costRating)
             .reduce((sum, r) => sum + (r.costRating || 0), 0) /
-          model.userRatings.filter(r => r.costRating).length || 0
+          userRatings.filter(r => r.costRating).length || 0
         : 0
 
       // Получаем ключевые бенчмарки
-      const benchmarks = model.benchmarkResults.reduce((acc, result) => {
+      const benchmarkResults = model.benchmarkResults || []
+      const benchmarks = benchmarkResults.reduce((acc, result) => {
         if (!acc[result.metricName]) {
           acc[result.metricName] = []
         }
@@ -232,8 +252,8 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
         avgResponseTime,
         successRate,
         passRate,
-        totalBenchmarks: model._count.benchmarkResults,
-        totalRatings: model._count.userRatings
+        totalBenchmarks: model._count?.benchmarkResults || 0,
+        totalRatings: model._count?.userRatings || 0
       }
     })
   }, [models])
@@ -266,19 +286,19 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
                 {isModelAvailableInCursor(row.original.name) && (
                   <Code
                     className="h-4 w-4 text-blue-600 dark:text-blue-400"
-                    title="Доступно в Cursor IDE"
+                    aria-label="Доступно в Cursor IDE"
                   />
                 )}
                 {row.original.isReasoning && (
                   <Brain
                     className="h-4 w-4 text-purple-600 dark:text-purple-400"
-                    title="Модель с reasoning способностями"
+                    aria-label="Модель с reasoning способностями"
                   />
                 )}
                 {row.original.isAgent && (
                   <Bot
                     className="h-4 w-4 text-green-600 dark:text-green-400"
-                    title="Модель с agent capabilities"
+                    aria-label="Модель с agent capabilities"
                   />
                 )}
               </div>
@@ -666,19 +686,22 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
         ),
         accessorFn: (row) => {
           // Ищем aider benchmark среди результатов
-          const aiderBenchmark = row.benchmarkResults.find(b =>
+          const benchmarkResults = row.benchmarkResults || [];
+          const aiderBenchmark = benchmarkResults.find(b =>
             b.metricName.toLowerCase().includes('aider') ||
             b.benchmarkType.toLowerCase().includes('aider')
           );
           return aiderBenchmark ? aiderBenchmark.metricValue : null;
         },
         sortingFn: (rowA, rowB) => {
-          const aValue = rowA.original.benchmarkResults.find(b =>
+          const aBenchmarkResults = rowA.original.benchmarkResults || [];
+          const aValue = aBenchmarkResults.find(b =>
             b.metricName.toLowerCase().includes('aider') ||
             b.benchmarkType.toLowerCase().includes('aider')
           )?.metricValue || 0;
 
-          const bValue = rowB.original.benchmarkResults.find(b =>
+          const bBenchmarkResults = rowB.original.benchmarkResults || [];
+          const bValue = bBenchmarkResults.find(b =>
             b.metricName.toLowerCase().includes('aider') ||
             b.benchmarkType.toLowerCase().includes('aider')
           )?.metricValue || 0;
@@ -691,7 +714,8 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
           return bValue - aValue; // Сортировка по убыванию (лучшие модели сверху)
         },
         cell: ({ row }) => {
-          const aiderBenchmark = row.original.benchmarkResults.find(b =>
+          const benchmarkResults = row.original.benchmarkResults || [];
+          const aiderBenchmark = benchmarkResults.find(b =>
             b.metricName.toLowerCase().includes('aider') ||
             b.benchmarkType.toLowerCase().includes('aider')
           );

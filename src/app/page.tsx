@@ -4,6 +4,10 @@ import { useState, useEffect } from 'react'
 import { ModelsComparisonTable } from '@/components/ModelsComparisonTable'
 import { DashboardHeader } from '@/components/DashboardHeader'
 import { SyncStatus } from '@/components/SyncStatus'
+import staticData from '../../static-models-data.json'
+
+// Определяем режим работы
+const USE_STATIC_DATA = process.env.NODE_ENV === 'production' || process.env.NEXT_PUBLIC_USE_STATIC_DATA === 'true'
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
@@ -11,14 +15,31 @@ export default function Home() {
   const [modelsData, setModelsData] = useState<any[]>([])
 
   useEffect(() => {
-    // Загружаем начальные данные
-    loadInitialData()
+    // Загружаем данные в зависимости от режима
+    loadData()
   }, [])
 
-  const loadInitialData = async () => {
+  const loadData = async () => {
     try {
       setIsLoading(true)
+      
+      if (USE_STATIC_DATA) {
+        // Используем статические данные
+        setModelsData(staticData.models)
+        console.log(`Loaded ${staticData.models.length} models from static data`)
+      } else {
+        // Загружаем из API (база данных)
+        await loadFromAPI()
+      }
+    } catch (error) {
+      console.error('Error loading data:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
+  const loadFromAPI = async () => {
+    try {
       // Загружаем модели из API
       const modelsResponse = await fetch('/api/models')
       if (!modelsResponse.ok) throw new Error('Failed to fetch models')
@@ -26,19 +47,39 @@ export default function Home() {
       const modelsResult = await modelsResponse.json()
       if (modelsResult.success) {
         setModelsData(modelsResult.data)
-        console.log(`Loaded ${modelsResult.data.length} models`)
+        console.log(`Loaded ${modelsResult.data.length} models from API`)
       }
     } catch (error) {
-      console.error('Error loading initial data:', error)
-    } finally {
-      setIsLoading(false)
+      console.error('Error loading from API:', error)
+      // Fallback на статические данные при ошибке API
+      setModelsData(staticData.models)
+      console.log(`Fallback: Loaded ${staticData.models.length} models from static data`)
     }
   }
 
   const handleSync = async () => {
     try {
       setSyncStatus('syncing')
+      
+      if (USE_STATIC_DATA) {
+        // В статическом режиме просто перезагружаем данные
+        await loadData()
+        setSyncStatus('success')
+      } else {
+        // В режиме базы данных синхронизируем через API
+        await syncWithAPI()
+      }
+    } catch (error) {
+      console.error('Error syncing data:', error)
+      setSyncStatus('error')
+    } finally {
+      // Сбрасываем статус через 3 секунды
+      setTimeout(() => setSyncStatus('idle'), 3000)
+    }
+  }
 
+  const syncWithAPI = async () => {
+    try {
       // Синхронизируем модели
       const modelsResponse = await fetch('/api/models?sync=true')
       if (!modelsResponse.ok) throw new Error('Failed to sync models')
@@ -49,13 +90,10 @@ export default function Home() {
 
       setSyncStatus('success')
       // Перезагружаем данные
-      await loadInitialData()
+      await loadFromAPI()
     } catch (error) {
-      console.error('Error syncing data:', error)
-      setSyncStatus('error')
-    } finally {
-      // Сбрасываем статус через 3 секунды
-      setTimeout(() => setSyncStatus('idle'), 3000)
+      console.error('Error syncing with API:', error)
+      throw error
     }
   }
 

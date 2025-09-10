@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "dev:static": "cross-env NEXT_PUBLIC_USE_STATIC_DATA=true next dev --turbopack",
     "build": "next build --turbopack",
+    "build:static": "node scripts/switch-config.js local && cross-env NEXT_PUBLIC_USE_STATIC_DATA=true next build",
+    "build:github": "node scripts/switch-config.js production && cross-env NEXT_PUBLIC_USE_STATIC_DATA=true NODE_ENV=production next build",
     "start": "next start",
     "lint": "eslint",
     "db:generate": "prisma generate",
@@ -21,6 +24,7 @@
     "update:aider": "node scripts/update-aider-benchmarks.js",
     "update:agents": "node scripts/update-agent-capabilities.js",
     "export:static": "node scripts/export-static-data.js",
+    "export:full": "node scripts/export-full-data.js",
     "update:html": "node scripts/update-html-data.js"
   },
   "dependencies": {
@@ -44,6 +48,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cross-env": "^10.0.0",
     "eslint": "^9",
     "eslint-config-next": "15.5.2",
     "tailwindcss": "^4",

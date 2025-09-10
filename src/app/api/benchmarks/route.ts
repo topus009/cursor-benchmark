@@ -1,9 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { BenchmarkService } from '@/lib/services/benchmark.service'
+import { isStaticExport, createStaticModeResponse } from '@/lib/api-utils'
+
+export const dynamic = 'force-static'
 
 const benchmarkService = new BenchmarkService()
 
 export async function GET(request: NextRequest) {
+  if (isStaticExport) {
+    return NextResponse.json(createStaticModeResponse(), { status: 404 })
+  }
   try {
     const { searchParams } = new URL(request.url)
     const modelId = searchParams.get('modelId')

@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { scheduler } from '@/lib/services/scheduler.service'
+import { isStaticExport, createStaticModeResponse } from '@/lib/api-utils'
+
+export const dynamic = 'force-static'
 
 export async function GET() {
+  if (isStaticExport) {
+    return NextResponse.json(createStaticModeResponse(), { status: 404 })
+  }
   try {
     const status = scheduler.getStatus()
 
