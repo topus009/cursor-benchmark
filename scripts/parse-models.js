@@ -41,7 +41,12 @@ function parseHTMLModels() {
       let category = 'chat';
       let isFree = false; // По умолчанию все модели платные
 
-      if (modelName.includes('claude')) {
+      if (modelName.includes('composer')) {
+        provider = 'Cursor';
+        category = 'coding';
+        // Composer - это модель Cursor
+        isFree = false;
+      } else if (modelName.includes('claude') || modelName.includes('opus') || modelName.includes('sonnet') || modelName.includes('haiku')) {
         provider = 'Anthropic';
         category = 'coding';
         // Claude модели платные, кроме некоторых старых версий
@@ -80,6 +85,11 @@ function parseHTMLModels() {
         provider = 'OpenAI';
         category = 'reasoning';
         // o1, o3, o4 - платные модели
+        isFree = false;
+      } else if (modelName.includes('deepseek') && modelName.includes('r1')) {
+        provider = 'DeepSeek';
+        category = 'reasoning';
+        // DeepSeek R1 - платная модель
         isFree = false;
       } else if (modelName.includes('mistral')) {
         provider = 'Mistral';
