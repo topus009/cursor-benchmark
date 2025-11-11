@@ -25,6 +25,7 @@
     "update:agents": "node scripts/update-agent-capabilities.js",
     "export:static": "node scripts/export-static-data.js",
     "export:full": "node scripts/export-full-data.js",
+    "scrape:cursor": "node scripts/scrape-cursor-pricing.js",
     "update:html": "node scripts/update-html-data.js"
   },
   "dependencies": {
@@ -48,9 +49,11 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cheerio": "^1.1.2",
     "cross-env": "^10.0.0",
     "eslint": "^9",
     "eslint-config-next": "15.5.2",
+    "puppeteer": "^24.29.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

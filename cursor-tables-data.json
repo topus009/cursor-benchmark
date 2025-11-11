@@ -1,0 +1,371 @@
+{
+  "models": [
+    {
+      "name": "Claude 3.5 Sonnet",
+      "provider": "Anthropic",
+      "defaultContext": 200000,
+      "maxContext": 200000,
+      "capabilities": [
+        "Agent",
+        "Thinking",
+        "Image"
+      ]
+    },
+    {
+      "name": "Claude 3.5 Sonnet v2",
+      "provider": "Anthropic",
+      "defaultContext": 200000,
+      "maxContext": 200000,
+      "capabilities": [
+        "Agent",
+        "Thinking",
+        "Image"
+      ]
+    },
+    {
+      "name": "Claude 3.5 Haiku",
+      "provider": "Anthropic",
+      "defaultContext": 200000,
+      "maxContext": 200000,
+      "capabilities": [
+        "Agent",
+        "Thinking"
+      ]
+    },
+    {
+      "name": "Claude 3.5 Haiku v2",
+      "provider": "Anthropic",
+      "defaultContext": 200000,
+      "maxContext": 200000,
+      "capabilities": [
+        "Agent",
+        "Thinking"
+      ]
+    },
+    {
+      "name": "Claude 3 Opus",
+      "provider": "Anthropic",
+      "defaultContext": 200000,
+      "maxContext": 200000,
+      "capabilities": [
+        "Agent",
+        "Thinking",
+        "Image"
+      ]
+    },
+    {
+      "name": "Claude 3 Opus v2",
+      "provider": "Anthropic",
+      "defaultContext": 200000,
+      "maxContext": 200000,
+      "capabilities": [
+        "Agent",
+        "Thinking",
+        "Image"
+      ]
+    },
+    {
+      "name": "Claude 3 Haiku",
+      "provider": "Anthropic",
+      "defaultContext": 200000,
+      "maxContext": 200000,
+      "capabilities": [
+        "Agent",
+        "Thinking"
+      ]
+    },
+    {
+      "name": "GPT-4o",
+      "provider": "OpenAI",
+      "defaultContext": 128000,
+      "maxContext": 128000,
+      "capabilities": [
+        "Agent",
+        "Thinking",
+        "Image"
+      ]
+    },
+    {
+      "name": "GPT-4o mini",
+      "provider": "OpenAI",
+      "defaultContext": 128000,
+      "maxContext": 128000,
+      "capabilities": [
+        "Agent",
+        "Thinking",
+        "Image"
+      ]
+    },
+    {
+      "name": "GPT-4 Turbo",
+      "provider": "OpenAI",
+      "defaultContext": 128000,
+      "maxContext": 128000,
+      "capabilities": [
+        "Agent",
+        "Thinking",
+        "Image"
+      ]
+    },
+    {
+      "name": "GPT-4",
+      "provider": "OpenAI",
+      "defaultContext": 128000,
+      "maxContext": 8000,
+      "capabilities": [
+        "Agent",
+        "Thinking",
+        "Image"
+      ]
+    },
+    {
+      "name": "Gemini 1.5 Pro",
+      "provider": "Google",
+      "defaultContext": 2000000,
+      "maxContext": 2000000,
+      "capabilities": [
+        "Agent",
+        "Thinking",
+        "Image"
+      ]
+    },
+    {
+      "name": "Gemini 1.5 Flash",
+      "provider": "Google",
+      "defaultContext": 1000000,
+      "maxContext": 2000000,
+      "capabilities": [
+        "Agent",
+        "Thinking",
+        "Image"
+      ]
+    },
+    {
+      "name": "DeepSeek Coder",
+      "provider": "DeepSeek",
+      "defaultContext": 32000,
+      "maxContext": 32000,
+      "capabilities": [
+        "Agent",
+        "Thinking"
+      ]
+    },
+    {
+      "name": "DeepSeek Chat",
+      "provider": "DeepSeek",
+      "defaultContext": 32000,
+      "maxContext": 32000,
+      "capabilities": [
+        "Agent",
+        "Thinking"
+      ]
+    },
+    {
+      "name": "Grok-2",
+      "provider": "xAI",
+      "defaultContext": 128000,
+      "maxContext": 128000,
+      "capabilities": [
+        "Agent",
+        "Thinking"
+      ]
+    },
+    {
+      "name": "Grok-1.5",
+      "provider": "xAI",
+      "defaultContext": 128000,
+      "maxContext": 128000,
+      "capabilities": [
+        "Agent",
+        "Thinking"
+      ]
+    },
+    {
+      "name": "Grok-1.5V",
+      "provider": "xAI",
+      "defaultContext": 128000,
+      "maxContext": 128000,
+      "capabilities": [
+        "Agent",
+        "Thinking",
+        "Image"
+      ]
+    },
+    {
+      "name": "Llama 3.1 405B",
+      "provider": "Meta",
+      "defaultContext": 128000,
+      "maxContext": 128000,
+      "capabilities": [
+        "Agent",
+        "Thinking"
+      ]
+    },
+    {
+      "name": "Llama 3.1 70B",
+      "provider": "Meta",
+      "defaultContext": 128000,
+      "maxContext": 128000,
+      "capabilities": [
+        "Agent",
+        "Thinking"
+      ]
+    },
+    {
+      "name": "Llama 3.1 8B",
+      "provider": "Meta",
+      "defaultContext": 128000,
+      "maxContext": 128000,
+      "capabilities": [
+        "Agent",
+        "Thinking"
+      ]
+    },
+    {
+      "name": "Composer 1",
+      "provider": "Cursor",
+      "defaultContext": 128000,
+      "maxContext": 128000,
+      "capabilities": [
+        "Agent",
+        "Thinking"
+      ]
+    }
+  ],
+  "pricing": {
+    "Claude 3.5 Sonnet": {
+      "input": 0.000003,
+      "cacheWrite": 0.00000375,
+      "cacheRead": 3e-7,
+      "output": 0.000015
+    },
+    "Claude 3.5 Sonnet v2": {
+      "input": 0.000003,
+      "cacheWrite": 0.00000375,
+      "cacheRead": 3e-7,
+      "output": 0.000015
+    },
+    "Claude 3.5 Haiku": {
+      "input": 8.000000000000001e-7,
+      "cacheWrite": 0.000001,
+      "cacheRead": 8e-8,
+      "output": 0.000004
+    },
+    "Claude 3.5 Haiku v2": {
+      "input": 8.000000000000001e-7,
+      "cacheWrite": 0.000001,
+      "cacheRead": 8e-8,
+      "output": 0.000004
+    },
+    "Claude 3 Opus": {
+      "input": 0.000015,
+      "cacheWrite": 0.00001875,
+      "cacheRead": 0.0000015,
+      "output": 0.000075
+    },
+    "Claude 3 Opus v2": {
+      "input": 0.000015,
+      "cacheWrite": 0.00001875,
+      "cacheRead": 0.0000015,
+      "output": 0.000075
+    },
+    "Claude 3 Haiku": {
+      "input": 2.5e-7,
+      "cacheWrite": 3e-7,
+      "cacheRead": 3e-8,
+      "output": 0.00000125
+    },
+    "GPT-4o": {
+      "input": 0.0000025,
+      "cacheWrite": 0.00000375,
+      "cacheRead": 0.00000125,
+      "output": 0.00001
+    },
+    "GPT-4o mini": {
+      "input": 1.5e-7,
+      "cacheWrite": 2.0000000000000002e-7,
+      "cacheRead": 8e-8,
+      "output": 6e-7
+    },
+    "GPT-4 Turbo": {
+      "input": 0.00001,
+      "cacheWrite": 0.0000125,
+      "cacheRead": 0.0000025,
+      "output": 0.00003
+    },
+    "GPT-4": {
+      "input": 0.00003,
+      "cacheWrite": 0.0000375,
+      "cacheRead": 0.0000075,
+      "output": 0.00006
+    },
+    "Gemini 1.5 Pro": {
+      "input": 0.0000035,
+      "cacheWrite": 0.000007,
+      "cacheRead": 3.5e-7,
+      "output": 0.0000105
+    },
+    "Gemini 1.5 Flash": {
+      "input": 3.5e-7,
+      "cacheWrite": 7e-7,
+      "cacheRead": 3.5e-8,
+      "output": 0.0000010500000000000001
+    },
+    "DeepSeek Coder": {
+      "input": 1.4e-7,
+      "cacheWrite": 1.4e-7,
+      "cacheRead": 1.4e-8,
+      "output": 2.8e-7
+    },
+    "DeepSeek Chat": {
+      "input": 1.4e-7,
+      "cacheWrite": 1.4e-7,
+      "cacheRead": 1.4e-8,
+      "output": 2.8e-7
+    },
+    "Grok-2": {
+      "input": 0.000002,
+      "cacheWrite": 0.000002,
+      "cacheRead": 2.0000000000000002e-7,
+      "output": 0.00001
+    },
+    "Grok-1.5": {
+      "input": 0.000005,
+      "cacheWrite": 0.000005,
+      "cacheRead": 5e-7,
+      "output": 0.000015
+    },
+    "Grok-1.5V": {
+      "input": 0.000005,
+      "cacheWrite": 0.000005,
+      "cacheRead": 5e-7,
+      "output": 0.000015
+    },
+    "Llama 3.1 405B": {
+      "input": 0.00000265,
+      "cacheWrite": 0.00000265,
+      "cacheRead": 2.65e-7,
+      "output": 0.00000265
+    },
+    "Llama 3.1 70B": {
+      "input": 7.2e-7,
+      "cacheWrite": 7.2e-7,
+      "cacheRead": 7.2e-8,
+      "output": 7.2e-7
+    },
+    "Llama 3.1 8B": {
+      "input": 5.5e-8,
+      "cacheWrite": 5.5e-8,
+      "cacheRead": 5.5e-9,
+      "output": 5.5e-8
+    },
+    "Composer 1": {
+      "input": 0,
+      "cacheWrite": 0,
+      "cacheRead": 0,
+      "output": 0
+    }
+  },
+  "parsedAt": "2025-11-11T22:23:43.775Z",
+  "source": "cursor-tables.html"
+}
