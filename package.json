@@ -26,6 +26,9 @@
     "export:static": "node scripts/export-static-data.js",
     "export:full": "node scripts/export-full-data.js",
     "scrape:cursor": "node scripts/scrape-cursor-pricing.js",
+    "scrape:enhanced": "node scripts/enhanced-scraper.js",
+    "clean:duplicates": "node scripts/clean-duplicates.js",
+    "smart:deduplicate": "node scripts/smart-deduplicate.js",
     "update:html": "node scripts/update-html-data.js"
   },
   "dependencies": {

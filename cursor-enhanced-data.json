@@ -1,0 +1,99 @@
+{
+  "models": [
+    {
+      "name": "Claude 4.5 Sonnet",
+      "provider": "Anthropic",
+      "defaultContext": "200k",
+      "maxContext": "1M",
+      "capabilities": []
+    },
+    {
+      "name": "Composer 1",
+      "provider": "Cursor",
+      "defaultContext": "200k",
+      "maxContext": "-",
+      "capabilities": []
+    },
+    {
+      "name": "Gemini 2.5 Pro",
+      "provider": "Google",
+      "defaultContext": "200k",
+      "maxContext": "1M",
+      "capabilities": []
+    },
+    {
+      "name": "GPT-5",
+      "provider": "OpenAI",
+      "defaultContext": "272k",
+      "maxContext": "-",
+      "capabilities": []
+    },
+    {
+      "name": "GPT-5 Fast",
+      "provider": "OpenAI",
+      "defaultContext": "272k",
+      "maxContext": "-",
+      "capabilities": []
+    },
+    {
+      "name": "GPT-5-Codex",
+      "provider": "OpenAI",
+      "defaultContext": "272k",
+      "maxContext": "-",
+      "capabilities": []
+    },
+    {
+      "name": "Grok Code",
+      "provider": "xAI",
+      "defaultContext": "256k",
+      "maxContext": "-",
+      "capabilities": []
+    }
+  ],
+  "pricing": {
+    "Claude 4.5 Sonnet": {
+      "input": 3,
+      "cacheWrite": 3.75,
+      "cacheRead": 0.3,
+      "output": 15
+    },
+    "Composer 1": {
+      "input": 1.25,
+      "cacheWrite": 1.25,
+      "cacheRead": 0.13,
+      "output": 10
+    },
+    "Gemini 2.5 Pro": {
+      "input": 1.25,
+      "cacheWrite": 1.25,
+      "cacheRead": 0.13,
+      "output": 10
+    },
+    "GPT-5": {
+      "input": 1.25,
+      "cacheWrite": 1.25,
+      "cacheRead": 0.13,
+      "output": 10
+    },
+    "GPT-5 Fast": {
+      "input": 2.5,
+      "cacheWrite": 2.5,
+      "cacheRead": 0.25,
+      "output": 20
+    },
+    "GPT-5-Codex": {
+      "input": 1.25,
+      "cacheWrite": 1.25,
+      "cacheRead": 0.13,
+      "output": 10
+    },
+    "Grok Code": {
+      "input": 0.2,
+      "cacheWrite": 0.2,
+      "cacheRead": 0.02,
+      "output": 1.5
+    }
+  },
+  "scrapedAt": "2025-11-11T22:27:46.184Z",
+  "source": "https://cursor.com/ru/docs/models (enhanced)"
+}
