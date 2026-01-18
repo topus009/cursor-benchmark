@@ -15,46 +15,6 @@ import { ArrowUpDown, ArrowUp, ArrowDown, Star, Clock, DollarSign, Zap, MessageS
 import { ModelRatingForm } from './ModelRatingForm'
 import { ModelBenchmarkDetails } from './ModelBenchmarkDetails'
 
-// Список моделей, доступных в Cursor IDE
-const CURSOR_AVAILABLE_MODELS = [
-  'claude-3.5-haiku',
-  'claude-3.5-sonnet', 
-  'claude-3.7-sonnet',
-  'claude-4-opus',
-  'claude-4-sonnet',
-  'claude-4-sonnet-1m',
-  'claude-4.1-opus',
-  'deepseek-r1-0528',
-  'deepseek-v3.1',
-  'gemini-2.5-flash',
-  'gemini-2.5-pro',
-  'gpt-4.1',
-  'gpt-4o',
-  'gpt-5',
-  'gpt-5-fast',
-  'gpt-5-high',
-  'gpt-5-high-fast',
-  'gpt-5-low',
-  'gpt-5-low-fast',
-  'gpt-5-medium',
-  'gpt-5-medium-fast',
-  'gpt-5-mini',
-  'gpt-5-nano',
-  'grok-3',
-  'grok-3-mini',
-  'grok-4',
-  'grok-code-fast-1',
-  'kimi-k2-instruct',
-  'o3',
-  'o3-pro',
-  'o4-mini'
-]
-
-// Функция для проверки, доступна ли модель в Cursor IDE
-const isModelAvailableInCursor = (modelName: string): boolean => {
-  return CURSOR_AVAILABLE_MODELS.includes(modelName)
-}
-
 interface AIModel {
   id: string
   name: string
@@ -283,10 +243,10 @@ export function ModelsComparisonTable({ initialData = [] }: ModelsComparisonTabl
             <div className="flex items-center gap-2">
               <div className="font-medium text-gray-900 dark:text-white">{row.original.displayName}</div>
               <div className="flex items-center gap-1">
-                {isModelAvailableInCursor(row.original.name) && (
+                {row.original.isAvailableInCursor && (
                   <Code
                     className="h-4 w-4 text-blue-600 dark:text-blue-400"
-                    aria-label="Доступно в Cursor IDE"
+                    aria-label="Доступно в Kilo Code"
                   />
                 )}
                 {row.original.isReasoning && (
